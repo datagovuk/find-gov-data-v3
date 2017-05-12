@@ -1,0 +1,6 @@
+---
+applications:
+- name: find-data-alpha
+  command: npm start
+  memory: 256M
+  buildpack: nodejs_buildpack
