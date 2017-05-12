@@ -30,6 +30,11 @@ $path: "/public/images/";
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
+* {
+
+  font-family: $helvetica-regular !important;
+}
+
 #global-header #logo {
   background: none;
 }
@@ -134,6 +139,7 @@ dl.metadata {
 table th, table td {
   padding-right: 35px;
   padding-left: 0;
+  vertical-align: top;
 }
 
 table tr td:last-child {
@@ -141,7 +147,11 @@ table tr td:last-child {
 }
 
 table th.title, table td.title {
-  width: 338px;
+  width: 510px;
+}
+
+table tr td:last-child {
+  text-align: right;
 }
 
 .feedback-form .multiple-choice {
@@ -586,4 +596,31 @@ input.form-control.search {
   color: $link-colour;
   cursor: pointer;
   text-decoration: underline;
+}
+
+//preview page
+
+main.preview#content {
+  max-width: 90%;
+}
+
+section.preview {
+  margin-top: 40px;
+  overflow-x: scroll;
+  table {
+    border: 4px solid #DEE0E2;
+    th, td {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    th, tr:nth-child(2n) {
+      background-color: #F8F8F8;
+    }
+    tr td {
+      border-bottom: none;
+    }
+  }
+  ul.pagination {
+    margin-left: 0;
+  }
 }
