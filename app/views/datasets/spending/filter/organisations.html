@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+
+{% block page_title %}
+  Dataset - data.gov.uk
+{% endblock %}
+
+{% block content %}
+
+<main id="content" class="local-authority-choice" role="main">
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p class="heading-first">Local Authorities datasets collection</p>
+      <h1 class="heading-large">Spending over £500</h1>
+      <p class="lede">Select Local Authorities</p>
+    </div>
+  </div>
+
+  <div class="grid-row">
+      <form id="select-LA" action="" method="GET" class="column-two-thirds">
+        <fieldset>
+          {% for organisation in data.organisations %}
+          <div class="multiple-choice">
+            <input id="checkbox-{{ organisation.name }}"
+                   name="LA"
+                   type="checkbox"
+                   value="{{ organisation.name }}">
+            <label for="checkbox-{{ organisation.name }}">{{ organisation.title }}</label>
+          </div>
+          {% endfor %}
+          <div class="form-group">
+            <a href="year" class="button">Next</a>
+          </div>
+        </fieldset>
+      </form>
+
+  </div>
+
+</main>
+
+{% endblock %}

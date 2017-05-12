@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <h1 class="heading-large">
+        Country Register
+
+      </h1>
+      <div class="box">
+        <h3 class="heading-small">
+            Summary
+        </h3>
+        <p>British English-language names and descriptive terms for countries<br></p>
+        <dl class="metadata">
+          <dt>Published by</dt>
+          <dd><a href="">Foreign and Commonwealth Office</a></dd>
+<!--      To display once you click on learn more
+          <dt>Last updated</dt>
+          <dd>05 April 2017</dd>
+          <dt>Update frequency</dt>
+          <dd>Every quarter</dd>
+          <dt>License</dt>
+          <dd>Open Government License</dd> -->
+        </dl>
+        <p><a href="" class="toggle">Learn more about this dataset</a></p>
+      </div>
+      <section class="data-links">
+        <h2 class="heading-medium">
+          Data links<span class="showHide-open-all">Open all</span>
+        </h2>
+        <div class="breaker"></div>
+        <ul>
+          <li>
+            <div class="year-datasets">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="title">Link to the data</th>
+                    <th>Format</th>
+                    <th>Date added</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="title"><a href="">Countries</a></td>
+                    <td>CSV</td>
+                    <td>02 April 2017</td>
+                  </tr>
+                  <tr>
+                    <td class="title"><a href="">Countries</a></td>
+                    <td>CSV</td>
+                    <td>02 March 2017</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </li>
+
+        </ul>
+        <input class="button" type="submit" value="Download all">
+      </section>
+      <h2 class="heading-medium">
+        Additional information
+      </h2>
+      <p>
+            Registers are lists of information. Each register is the most reliable list of its kind. For example, the Foreign and Commonwealth Office’s (FCO’s) country register is the most accurate and up-to-date list of countries available.
+            <br/><br/>
+            Each register is looked after by one person, known as the ‘custodian’. The custodian is from the organisation responsible for the information in the register. They make sure the register is kept up to date.
+      </p>
+      <p><a href="https://www.gov.uk/government/publications/registers/registers">Visit registers homepage</a></p>
+      <h2 class="heading-medium">Supporting documentation</h2>
+      <table>
+        <thead>
+          <tr>
+            <th class="title">Document link</th>
+            <th>Format</th>
+            <th>Date added</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="title"><a href="https://www.gov.uk/government/publications/registers/registers">Registers homepage</a></td>
+            <td>HTML</td>
+            <td>02 February 2017</td>
+          </tr>
+        </tbody>
+      </table>
+      <section id="feedback">
+        <div>
+          <h3 class="heading-small">
+            Was this page useful for you?
+          </h3>
+          <form>
+            <div class="form-group feedback-form">
+              <fieldset class="inline">
+
+                <legend class="visually-hidden">Was this page useful for you?</legend>
+
+                <div class="multiple-choice">
+                  <input id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes">
+                  <label for="radio-inline-1">Yes</label>
+                </div>
+                <div class="multiple-choice" data-target="not-helpful">
+                  <input id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
+                  <label for="radio-inline-2">No</label>
+                </div>
+                <div class="panel panel-border-narrow js-hidden" id="not-helpful">
+                  <div class="multiple-choice">
+                    <input id="" name="" type="checkbox" value="true">
+                    <label for="">I couldn't find what I was looking for</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="" name="" type="checkbox" value="true">
+                    <label for="">The data was incomplete</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="" name="" type="checkbox" value="true">
+                    <label for="">The data is too old</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="" name="" type="checkbox" value="true">
+                    <label for="">The data was in a format I couldn't use</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="" name="" type="checkbox" value="true">
+                    <label for="">The data links don't work</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="" name="" type="checkbox" value="true">
+                    <label for="">The data contained errors</label>
+                  </div>
+                  <div class="multiple-choice">
+                    <input id="checkbox-telephone-number" name="contact-by-text-phone" type="checkbox" value="true">
+                    <label for="checkbox-telephone-number">Other</label>
+                  </div>
+                  <input class="button" type="submit" value="Submit">
+                </div>
+
+
+              </fieldset>
+            </div>
+          </form>
+      </section>
+    </div>
+    <div class="column-one-third related">
+      <h3 class="heading-small">Search on data.gov.uk</h3>
+      <input class="form-control" id="full-name-f1" type="text">
+      <h3 class="heading-small">Related datasets</h3>
+      <ul>
+        <li><a href="">Housing prices in London</a></li>
+        <li><a href="">Tenants in England and Wales</a></li>
+        <li><a href="">Mortgage approval rates in the UK</a></li>
+        <li><a href="">Cost of living 2016</a></li>
+        <li><a href="">Shared ownership sales in Wales</a></li>
+        <li><a href="">Mortgage interest rates in Scotland</a></li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  <div class="grid-row">
+    <div class="column-full">
+      <h1 class="heading-xlarge">
+        Data.gov.uk
+      </h1>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <p class="lede column-full">
+      Find data published by government departments and agencies, public bodies and local authorities. You can use this data to learn more about how government works, carry out research or build applications and services.
+    </p>
+  </div>
+
+
+  <div class="grid-row">
+    <div class="column-full">
+      <h1 class="heading-large">
+        I want to find data
+      </h1>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-full">
+        <form action="https://google.com/" method="get">
+          <input id="q" name="q" type="text" placeholder="Search Google" class="form-control search" autocomplete="off"><button type="submit" class="search-submit" >Find data</button>
+        </form>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-full">
+      <h1 class="heading-large">
+        I want to publish data
+        <span class="heading-secondary">Making your data discoverable</span>
+      </h1>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-medium">
+        Making your data findable
+      </h1>
+      <p>
+        The most efficient way to make your data discoverable, is to provide enough information
+      to the global search engines that they know which of your web-pages point at data.
+      </p>
+      <p>
+        The best way to do this is to use the <a href="">schema.org</a> markup for datasets.
+        To achieve this GDS has provided a set of tools to make it easier for you to supply
+        the required information.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-medium">
+        Tools
+      </h1>
+      <p>
+        You can use the following tools to extend your current CMS or Data Management System and
+        make the required information available to search engines. If your platform is not show below,
+        or you require further guidance on how to implement schema.org on your site, please <a href="">get in touch</a>
+      </p>
+
+       <ul class="list list-bullet">
+          <li><a href="/">CKAN extension</a></li>
+          <li><a href="/">Drupal extension</a></li>
+          <li><a href="/">Wordpress plugin</a></li>
+       </ul>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}
+
+

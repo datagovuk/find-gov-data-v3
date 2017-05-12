@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+    Collections - Local
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+
+  <div class="masthead">
+    <div class="grid-row">
+      <div class="column-full">
+        <h1 class="heading-large">
+          <span class="heading-secondary">Collection</span>
+          Find data from Local Authorities
+        </h1>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <form id="search-form" action="/dataset" method="GET" class="column-two-thirds">
+        <label for="q">Search by title or description</label>
+        <fieldset>
+          <div id="search-box">
+            <nobr>
+              <input id="q" name="q" type="text" placeholder=""
+                     class="form-control search" autocomplete="off"
+                     style="width: 75%; height: 50px;">
+              <button type="submit" class="button" style="height: 50px;  margin-top: -1px">Find data</button>
+            </nobr>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="column-one-third">
+        <a href="">Subscribe to email alerts</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-medium">
+        <a href="/dataset/local/spending">Spending over £500</a>
+      </h1>
+      <p>Spending from Local Authorities over £500</p>
+    </div>
+  </div>
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-medium">
+        <a href="">Procurement card transactions</a>
+      </h1>
+      <p>Local authority Procurement card transactions</p>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}

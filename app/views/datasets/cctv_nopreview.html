@@ -1,0 +1,194 @@
+{% extends "layout.html" %}
+
+
+{% block page_title %}
+  Dataset - data.gov.uk
+{% endblock %}
+
+{% block content %}
+
+  <main id="content" role="main" class="dataset">
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h1 class="heading-large">CCTV</h1>
+
+        <ul class="dataset-details">
+          <li><div>Published by:</div>Multiple organisations</li>
+          <li><div>Last updated:</div>28 February 2014 <a href="#">See full history</a></li>
+          <li><div>Expected update:</div>Continuous</li>
+        </ul>
+
+
+        <p class="description">
+          Details and locations of all public sector funded CCTV cameras
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <button class="button">Download all</button>
+      </div>
+    </div>
+
+    <br/>
+
+    <div class="grid-row">
+      <div class="column-one-third dataset-toc">
+        <nav class="dataset-toc">
+          <ul>
+            <li><a href="#data">Data</a></li>
+            <li><a href="#support">Supporting documents</a></li>
+            <li><a href="#info">Additional information</a></li>
+            <li><a href="#complete">Completeness</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#related">Related datasets</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="column-two-thirds">
+        <section>
+          <div class="title-download">
+            <h2 id="data" class="heading-large">Data</h2>
+            <div>
+            </div>
+          </div>
+          <br/>
+          <div class="breaker"></div>
+          <ul>
+            <li class="showHide">
+              <div class="year-expand">
+                <h3 class="heading-small">2017</h3>
+                <div><span class="expand showHide-control">-</span></div>
+              </div>
+              <div class="year-datasets showHide-content">
+                <ul>
+                  <li>
+                    <h4 class="heading-xsmall">February 2017</h4>
+                    <a href="#" class="preview">Preview</a> <a href="#">Download CSV</a> 25KB
+                  </li>
+                  <li>
+                    <h4 class="heading-xsmall">January 2017</h4>
+                    <a href="#" class="preview">Preview</a> <a href="#">Download CSV</a> 25KB
+                  </li>
+                </ul>
+                <hr/>
+              </div>
+            </li>
+            <li class="showHide">
+              <div class="year-expand">
+                <h3 class="heading-small">2016</h3>
+                <div><span class="expand showHide-control">+</span></div>
+              </div>
+              <div class="year-datasets showHide-content" style="display: none">
+                <ul>
+                  <li>
+                    <h4 class="heading-xsmall">February 2016</h4>
+                    <a href="#" class="preview">Preview</a> <a href="#">Download CSV</a> 25KB
+                  </li>
+                  <li>
+                    <h4 class="heading-xsmall">January 2016</h4>
+                    <a href="#" class="preview">Preview</a> <a href="#">Download CSV</a> 25KB
+                  </li>
+                </ul>
+                <hr/>
+              </div>
+            </li>
+            <li class="showHide">
+              <div class="year-expand">
+                <h3 class="heading-small">2015</h3>
+                <div><span class="expand showHide-control">+</span></div>
+              </div>
+              <div class="year-datasets showHide-content" style="display: none">
+                <ul class="year-datasets">
+                  <li>
+                    <h4 class="heading-xsmall">February 2015</h4>
+                    <a href="#" class="preview">Preview</a> <a href="#">Download CSV</a> 25KB
+                  </li>
+                  <li>
+                    <h4 class="heading-xsmall">January 2015</h4>
+                    <a href="#" class="preview">Preview</a> <a href="#">Download CSV</a> 25KB
+                  </li>
+                </ul>
+                <hr/>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 id="support" class="heading-large">Supporting documents</h2>
+          <p>
+            National minimum wage: interim government evidence to the
+            Low Pay Commission 2012
+          </p>
+          <p><a href="#">Download PDF</a> 25KB</p>
+        </section>
+
+
+        <section>
+          <h2 id="info" class="heading-large">Additional information</h2>
+
+          <p>This dataset is available under the <a href="#">Open Government Licence</a></p>
+        </section>
+
+        <section>
+          <h2 id="complete" class="heading-large">Completeness / Mistakes</h2>
+
+          <p style="color:red">Currently not captured on Publish data</p>
+        </section>
+
+
+        <section>
+          <h2 id="contact" class="heading-large">Contact</h2>
+
+          <div class="grid-row">
+            <div class="column-one-half">
+              Enquiries:<br/>
+              <br/>
+              enquiries@hscic.gov.uk<br/>
+              Telephone: 0300 303 5678
+            </div>
+            <div class="column-one-half">
+              FOI requests:<br/>
+              <br/>
+              enquiries@hscic.gov.uk<br/>
+              Telephone: 0300 303 5678<br/>
+              Read about FOI
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 id="related" class="heading-medium related">Related datasets</h2>
+
+          <p>These datasets are relevant to the information you're looking for because they're around the same topic</p>
+
+
+          <ul class="related-list">
+            <li>
+              <p><a href="#">Parking income and expenditure</a></p>
+              <p>Dataset describing the mean number of cats per square kilometre across GB</p>
+            </li>
+            <li>
+              <p><a href="#">Fraud investigations</a></p>
+              <p>Dataset describing the mean number of cats per square kilometre across GB</p>
+            </li>
+            <li>
+              <p><a href="#">Car parks</a></p>
+              <p>Dataset describing the mean number of cats per square kilometre across GB</p>
+            </li>
+          </ul>
+        </section>
+
+        <a href="#" class="report-a-problem">Is there anything wrong with this dataset?</a>
+
+      </div>
+    </div>
+
+
+  </main>
+
+
+{% endblock %}

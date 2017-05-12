@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+    Collections - Local
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+
+  <div class="grid-row">
+    <div class="column-full">
+      <h1 class="heading-large">
+        <span class="heading-secondary">Collection</span>
+        Registers
+      </h1>
+
+      <p class="lede">
+        Registers are lists of information. Each register is the most reliable list of its kind. If you wish to know more about registers, please <a href="https://www.gov.uk/government/publications/registers/registers">visit the registers guidance</a>
+      </p>
+
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-one-half">
+      <h2 class="heading-medium">
+        Territory register
+      </h2>
+      <p>British English-language names and descriptive terms for political, administrative and geographical entities that aren’t recognised as countries by the UK</p>
+      <a href="/datasets/country-register">View register</a>
+    </div>
+
+    <div class="column-one-half">
+      <h2 class="heading-medium">
+        Country register
+      </h2>
+      <p>British English-language names and descriptive terms for countries</p>
+      <a href="/datasets/country-register">View register</a>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}

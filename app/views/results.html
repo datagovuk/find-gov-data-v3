@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+
+{% block page_title %}
+  Search results - data.gov.uk
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        Search results
+      </h1>
+    </div>
+
+    <form id="search-form" action="/search-results" method="GET" class="column-two-thirds">
+      <fieldset>
+        <div id="search-box">
+          <input id="q" name="q" type="text" placeholder="" class="form-control search" value="broadband" autocomplete="off"/><button type="submit" class="search-submit">Find data</button>
+        </div>
+      </fieldset>
+    </form>
+
+  </div>
+
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <br/>
+      <span class="bold-xlarge">356</span> results for <span class="bold-small">broadband</span>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-one-third filter-block">
+
+      <h1 class="heading-small">
+        I'm looking for
+      </h1>
+
+      <fieldset style="margin-top: 30px;">
+        <label for="publishers"
+               class="form-label bold">
+          Year
+        </label>
+        <select class="form-control" id="select-box">
+          <option></option>
+          <option>2017</option>
+          <option>2016</option>
+          <option>2015</option>
+        </select>
+      </fieldset>
+
+      <fieldset style="margin-top: 30px;">
+        <label for="publishers"
+               class="form-label bold">
+          Location
+        </label>
+        <select class="form-control" id="select-box">
+          <option></option>
+          <option>National</option>
+          <option>Cheshire</option>
+          <option>Wirral</option>
+          <option>London</option>
+        </select>
+      </fieldset>
+
+      <fieldset style="margin-top: 30px;">
+        <label for="publishers"
+               class="form-label bold">
+          Publisher
+        </label>
+        <select class="form-control" id="select-box">
+          <option></option>
+          <option>Central Government</option>
+          <option>Local Authorities</option>
+          <option>Other Government Bodies</option>
+        </select>
+      </fieldset>
+
+      <br/>
+    </div>
+
+
+
+
+    <div class="column-two-thirds">
+
+      {% for bb in data.broadband %}
+        <div class="dataset">
+          <h1 class="heading-medium">
+            <a href="/datasets/broadband">{{ bb.title }} </a>
+            <span class="heading-secondary">{{ bb.publisher }}</span>
+          </h1>
+          <p>{{ bb.description | truncate(140)  }}</p>
+        </div>
+      {% endfor %}
+      <hr/>
+      <ul class="pagination">
+        <li>1</li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}

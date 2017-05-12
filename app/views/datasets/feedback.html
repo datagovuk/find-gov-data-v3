@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+
+{% block page_title %}
+  Dataset - data.gov.uk
+{% endblock %}
+
+{% block content %}
+
+  <main id="content" role="main" class="dataset">
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h1 class="heading-large">
+          Country Register
+        </h1>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-full">
+        <p class="lede">
+          This dataset isn't what I wanted, because:
+        </p>
+
+        <details>
+          <summary><span class="summary">The link is broken</span></summary>
+          <div class="panel panel-border-narrow">
+            <p>
+              Broken links often happen when a publisher moves the data on their local system.
+              You should <a href="">contact the Foreign and Commonwealth Office</a> and ask them to fix the link.
+            </p>
+          </div>
+        </details>
+
+
+        <details>
+          <summary><span class="summary">The data appears out of date</span></summary>
+          <div class="panel panel-border-narrow">
+            <p>
+              To find out if more up-to-date data is available <a href="">contact the Foreign and Commonwealth Office</a>
+            </p>
+          </div>
+        </details>
+
+
+        <details>
+          <summary><span class="summary">The data was in the wrong format</span></summary>
+          <div class="panel panel-border-narrow">
+            <p>
+              Sometimes, it is possible to convert from one format to another using existing software.
+              Please check the <a href="">data.gov.uk conversion service</a> for more information.
+            </p>
+          </div>
+        </details>
+
+
+        <details>
+          <summary><span class="summary">It didn't cover the correct geographic area</span></summary>
+          <div class="panel panel-border-narrow">
+            <p>
+              You can retry your search for 'country register' and specify a location. You can use the box below.
+            </p>
+            <p>
+              <form action="https://google.com/" method="get">
+                <input id="q" name="q" type="text" class="form-control search" autocomplete="off" placeholder="Specify a location"><button type="submit" class="search-submit" >Find data</button>
+              </form>
+            </p>
+          </div>
+        </details>
+
+
+        <details>
+          <summary><span class="summary">Something else</span></summary>
+          <div class="panel panel-border-narrow">
+            <p>
+              If you believe it is something only the publisher can fix, either by changing the data, or
+              adding more data, please <a href="">contact the publisher</a>
+            </p>
+            <p>
+              If the problem is that the search result was unexpected, please <a href="">contact GDS</a>
+            </p>
+            <p>
+              Alternatively, you may find one or more of the following datasets relevant:
+              <ul>
+                <li>
+                  <div class="dataset register">
+                    <h1 class="heading-medium">
+                      <a href="dataset/country-register">Territory Register</a>
+                      <span class="heading-secondary">Foreign and Commonwealth Office</span>
+                    </h1>
+                    <p>British English-language names and descriptive terms for countries</p>
+                  </div>
+                  <div class="dataset register">
+                    <h1 class="heading-medium">
+                      <a href="dataset/country-register">Internal Drainage Boards</a>
+                      <span class="heading-secondary">Department for Environment, Food and Rural Affairs</span>
+                    </h1>
+                    <p>A register of internal drainage boards in England</p>
+                  </div>
+                </li>
+              </ul>
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <br/>
+    <div class="grid-row">
+      <div class="column-one-third">
+        <a href="/" class="button button-start">Search again</a>
+      </div>
+    </div>
+
+  </main>
+
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+
+
+{% block page_title %}
+  Find Data Alpha
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  <div class="masthead">
+
+    <div class="grid-row">
+
+      <div class="column-two-thirds">
+        <h1 class="heading-xlarge">
+          Welcome to Find UK government data
+        </h1>
+
+        <p class="lede">
+          Find data published by central government, local authorities and, public bodies to help you build products and services.
+        </p>
+      </div>
+
+      <form id="search-form" action="/search-results" method="GET" class="column-two-thirds">
+        <fieldset>
+          <div id="search-box">
+            <input id="q" name="q" type="text" placeholder="" class="form-control search" autocomplete="off"/><button type="submit" class="search-submit">Find data</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <h1 class="heading-large">
+        See dataset collections
+        <span class="heading-secondary">Collections are curated datasets related to a specific topic</span>
+      </h1>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-one-half">
+      <h1 class="heading-medium">
+        <a href="/collections/registers">Registers</a>
+        <p>Maintained by HM government, use the Country, Territory, or the Local authority England register (among others) to help you build your services</p>
+      </h1>
+    </div>
+    <div class="column-one-half">
+      <h1 class="heading-medium">
+        <a href="/collections/flooding">Organograms</a>
+        <p>View the hierarchy of the cabinet office in the form of a visual diagram to understand its internal salary structure</p>
+      </h1>
+    </div>
+  </div>
+  <div class="grid-row">
+    <div class="column-one-half">
+      <h1 class="heading-medium">
+        <a href="/collections/registers">National authorities</a>
+        <p>From public transport, healthcare, or schools, to household population data; we've got the details</p>
+      </h1>
+    </div>
+    <div class="column-one-half">
+      <h1 class="heading-medium">
+        <a href="/collections/flooding">Local authorities</a>
+        <p>Discover data about local councils, spending figures, land planning, or reserves, plus much more</p>
+      </h1>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <h1 class="heading-large">
+        Weekly trending datasets
+      </h1>
+
+      <h1 class="heading-medium">
+        <a href="/datasets/immigration_statistics">Immigrations statistics</a>
+        <p>This dataset replaces Volume 1 of the Immigration Statistics: before entry.</p>
+      </h1>
+      <hr/>
+
+      <h1 class="heading-medium">
+        <a href="/datasets/land-registry-monthly-price-paid-data">HM Land Registry Price Paid Data</a>
+        <p>Our price paid data tracks the residential property sales in England and Wales that are lodged with us for registration.</p>
+      </h1>
+      <hr/>
+
+      <h1 class="heading-medium">
+        <a href="/datasets/international_comparisons_of_productivity">International comparisons of Productivity</a>
+        <p>An international comparison of productivity across the G7 nations, in terms of the level of and growth in GDP per hour and GDP per worker.</p>
+      </h1>
+      <hr/>
+    </div>
+
+    <div class="column-two-thirds">
+
+      <h1 class="heading-large">
+        Upcoming datasets
+      </h1>
+
+      <h1 class="heading-medium">
+        <a href="/datasets/primary-school-catchment-areas">Primary School Catchment areas</a>
+        <p>Catchment boundaries for Primary Schools in Gateshead Council.</p>
+        <p class="heading-secondary">
+          Due: June 2017
+          <a style="float:right;" href="">Alert me</a>
+        </p>
+      </h1>
+      <hr style="clear:both;"/>
+      <h1 class="heading-medium">
+        <a href="/datasets/statistics_on_obesity_physical_activity_and_diet_england">Statistics on Obesity, Physical Activity and Diet, England</a>
+        <p>This statistical report presents a range of information on obesity, physical activity and diet, drawn together from a variety of sources.</p>
+        <p class="heading-secondary">
+          Due: July 2017
+          <a style="float:right;" href="">Alert me</a>
+        </p>
+      </h1>
+      <hr style="clear:both;"/>
+      <h1 class="heading-medium">
+        <a href="/datasets/fixed-penalty-notice-dogs">Fixed Penalty Notice - Dogs</a>
+        <p class="heading-secondary">
+          Due: August 2017
+          <a style="float:right;" href="">Alert me</a>
+        </p>
+      </h1>
+      <hr style="clear:both;"/>
+
+    </div>
+
+  </div>
+
+
+
+
+</main>
+
+{% endblock %}

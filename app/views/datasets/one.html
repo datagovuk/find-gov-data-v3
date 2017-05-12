@@ -1,0 +1,167 @@
+{% extends "layout.html" %}
+
+
+{% block page_title %}
+  Dataset - data.gov.uk
+{% endblock %}
+
+{% block content %}
+
+  <main id="content" role="main" class="dataset">
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h1 class="heading-large">
+          Country Register
+        </h1>
+      </div>
+
+      <div class="column-one-third" >
+          <br/><br/><br/>
+            <strong class="bold-small" style='float: right;'>
+              <a href='/datasets/feedback' class="button"> Get help!</a>
+            </strong>
+      </div>
+
+      <div class="column-full">
+        <ul class="dataset-details">
+          <li><div>Published by:</div><a href="/dataset/?organisation=office-of-fair-trading">Foreign and Commonwealth Office</a></li>
+          <li><div>Last updated:</div>28 February 2014 <a href="#">See full history</a></li>
+        </ul>
+
+
+        <p class="description">
+          British English-language names and descriptive terms for countries
+        </p>
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <div class="grid-row">
+      <div class="column-one-third dataset-toc">
+        <nav>
+          <ul>
+            <li><a href="#data">Data</a></li>
+            <li><a href="#support">Supporting documents</a></li>
+            <li><a href="#info">Additional information</a></li>
+            <li><a href="#complete">Completeness</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#related">Related datasets</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="column-two-thirds">
+        <section>
+          <div class="title-download">
+            <h2 id="data" class="heading-large">Data</h2>
+            <div><a href="#">Download all as CSV</a> 25KB</div>
+          </div>
+          <div class="breaker"></div>
+          <ul>
+            <li class="showHide">
+              <div class="year-datasets showHide-content">
+                <ul>
+                  <li>
+                    <h4 class="heading-xsmall">Countries (CSV)</h4>
+                    <a href="#" class="preview">Preview</a> <a href="#">Download CSV</a> 25KB
+                    <span style='float:right;'>
+                      <a href="/whatis#csv">What is CSV?</a>
+                    </span>
+                  </li>
+                  <li>
+                    <h4 class="heading-xsmall">Countries (JSON)</h4>
+                    <a href="#" class="preview">Preview</a> <a href="#">Download JSON</a> 25KB
+                    <span style='float:right;'>
+                      <a href="/whatis#json">What is JSON?</a>
+                    </span>
+                  </li>
+                </ul>
+                <hr/>
+              </div>
+            </li>
+
+          </ul>
+        </section>
+
+        <section>
+          <h2 id="support" class="heading-large">Supporting documents</h2>
+          <p>
+            Registers are lists of information. Each register is the most reliable list of its kind. For example, the Foreign and Commonwealth Office’s (FCO’s) country register is the most accurate and up-to-date list of countries available.
+          </p>
+          <p>
+            Each register is looked after by one person, known as the ‘custodian’. The custodian is from the organisation responsible for the information in the register. They make sure the register is kept up to date.
+          </p>
+          <p><a href="https://www.gov.uk/government/publications/registers/registers">Visit page</a></p>
+        </section>
+
+
+        <section>
+          <h2 id="info" class="heading-large">Additional information</h2>
+
+          <p>This dataset is available under the <a href="#">Open Government Licence</a></p>
+        </section>
+
+        <section>
+          <h2 id="complete" class="heading-large">Completeness / Mistakes</h2>
+
+          <p style="color:red">Currently not captured on Publish data</p>
+        </section>
+
+
+        <section>
+          <h2 id="contact" class="heading-large">Contact</h2>
+
+          <div class="grid-row">
+            <div class="column-one-half">
+              Enquiries:<br/>
+              <br/>
+              enquiries@hscic.gov.uk<br/>
+              Telephone: 0300 303 5678
+            </div>
+            <div class="column-one-half">
+              FOI requests:<br/>
+              <br/>
+              enquiries@hscic.gov.uk<br/>
+              Telephone: 0300 303 5678<br/>
+              Read about FOI
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 id="related" class="heading-medium related">Related datasets</h2>
+
+          <p>These datasets are relevant to the information you're looking for because they're around the same topic</p>
+
+
+          <ul class="related-list">
+            <li>
+              <p><a href="#">Parking income and expenditure</a></p>
+              <p>Dataset describing the mean number of cats per square kilometre across GB</p>
+            </li>
+            <li>
+              <p><a href="#">Fraud investigations</a></p>
+              <p>Dataset describing the mean number of cats per square kilometre across GB</p>
+            </li>
+            <li>
+              <p><a href="#">Car parks</a></p>
+              <p>Dataset describing the mean number of cats per square kilometre across GB</p>
+            </li>
+          </ul>
+        </section>
+
+        <a href="#" class="report-a-problem">Is there anything wrong with this dataset?</a>
+
+      </div>
+    </div>
+
+
+  </main>
+
+
+{% endblock %}
