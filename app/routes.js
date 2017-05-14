@@ -281,5 +281,6 @@ router.get('/datasets/:name', function(req, res, next) { renderDataset('dataset'
 router.get('/datasets2/:name', function(req, res, next) { renderDataset('dataset2', req, res, next); })
 router.get('/datasets3/:name', function(req, res, next) { renderDataset('dataset3', req, res, next); })
 router.get('/datasets4/:name', function(req, res, next) { renderDataset('dataset4', req, res, next); })
+router.get('/datasets5/:name', function(req, res, next) { renderDataset('dataset5', req, res, next); })
 
 module.exports = router
