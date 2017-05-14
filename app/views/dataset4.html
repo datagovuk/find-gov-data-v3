@@ -19,10 +19,14 @@
           <dd><a href="">{{ result.organisation.title }}</a></dd>
           <dt>Last updated:</dt>
           <dd>{{ result.last_updated }}</dd>
-        {% if result.next_updated %}
           <dt>Expected update:</dt>
+        {% if result.next_updated %}
           <dd>{{ result.next_updated }}</dd>
+        {% else %}
+          <dd class="unavailable">Not available</dd>
         {% endif %}
+          <dt>Geographical area:</dt>
+          <dd class="unavailable">Not applicable</dd>
         </dl>
 
         <h3 class="heading-small">
@@ -33,16 +37,6 @@
       <section class="data-links">
     </div>
     <div class="column-one-third related-datasets">
-      <h3 class="heading-small related">Search UK Government data</h3>
-      {% block top_search %}
-        <form id="search-form" action="/search-results" method="GET" class="top-search">
-          <fieldset>
-            <div id="search-box">
-              <input id="q" name="q" type="text" placeholder="" class="form-control search" autocomplete="off" value="{{query}}"/><button type="submit" class="search-submit">Find data</button>
-            </div>
-          </fieldset>
-        </form>
-      {% endblock %}
       {% if related_datasets | length %}
         <h3 class="heading-small">Related datasets</h3>
         <ul>
@@ -51,6 +45,9 @@
           {% endfor %}
         </ul>
       {% endif %}
+      <h3 class="heading-small related">Do you know what you're looking for?</h3>
+      <p><a href="/search-tips">Get tips to make successful searches and find the right dataset</a></p>
+
     </div>
   </div>
   <div class="grid-row">
@@ -73,15 +70,16 @@
               <div class="year-datasets showHide-content" style="display: none">
                 <table>
                   <tr>
-                    <th class="title">Link to the data</th>
+                    <th class="title small">Link to the data</th>
                     <th>Format</th>
                     <th>Last updated</th>
                     <th> </th>
+                    <td> </td>
                   </tr>
                   <tbody>
                     {% for datafile in yearGroup.datafiles %}
                       <tr>
-                        <td class="title"><a href="{{ datafile.url }}">
+                        <td class="title small">
                           {% if datafile.name %} {{ datafile.name }}
                           {% else %} Data Link
                           {% endif %}
@@ -100,6 +98,7 @@
                             Not available
                         {% endif %}
                           </td>
+                          <td><a href="{{ datafile.url }}">Download</a></td>
                           <td><a href="/preview-1">Preview</a></td>
                       </tr>
                     {% endfor %}
@@ -116,14 +115,16 @@
           <h2 class="heading-medium">Data</h2>
           <table>
             <tr>
-              <th class="title">Link to the data</th>
+              <th class="title small">Link to the data</th>
               <th>Format</th>
               <th>Last updated</th>
+              <th> </th>
+              <th> </th>
             </tr>
             <tbody>
               {% for datafile in result.resources %}
                 <tr>
-                  <td class="title"><a href="{{ datafile.url }}">
+                  <td class="title small">
                     {{ datafile.name or "Data Link"}}
                   </td>
                   {% if datafile.format %}
@@ -140,6 +141,8 @@
                       Not available
                   {% endif %}
                     </td>
+                    <td><a href="{{ datafile.url }}">Download</a></td>
+                    <td><a href="/preview-1">Preview</a></td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -152,7 +155,7 @@
         <h2 class="heading-medium">
           Additional information
         </h2>
-        <p> This dataset is available under the <a href="">Open Government Licence</a>. All the data variables are coded rather than
+        <p class="additional-information"> This dataset is available under the <a href="">Open Government Licence</a>. All the data variables are coded rather than
         containing textual strings. The look up tables are available under "Additional resources" section towards the border-bottom
         of the table for the 2015 data.
 
@@ -213,9 +216,9 @@
 
       <section id="feedback">
         <div>
-          <h3 class="heading-small">
+          <h2 class="heading-medium">
             Was this page useful for you?
-          </h3>
+          </h2>
           <form>
             <div class="form-group feedback-form">
               <fieldset class="inline">

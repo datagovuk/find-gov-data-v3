@@ -19,10 +19,14 @@
           <dd><a href="">{{ result.organisation.title }}</a></dd>
           <dt>Last updated:</dt>
           <dd>{{ result.last_updated }}</dd>
-        {% if result.next_updated %}
           <dt>Expected update:</dt>
+        {% if result.next_updated %}
           <dd>{{ result.next_updated }}</dd>
+        {% else %}
+          <dd class="unavailable">Not available</dd>
         {% endif %}
+          <dt>Geographical area:</dt>
+          <dd class="unavailable">Not applicable</dd>
         </dl>
 
         <h3 class="heading-small">
@@ -124,7 +128,7 @@
         <h2 class="heading-medium">
           Additional information
         </h2>
-        <p> This dataset is available under the <a href="">Open Government Licence</a>. All the data variables are coded rather than
+        <p class="additional-information"> This dataset is available under the <a href="">Open Government Licence</a>. All the data variables are coded rather than
         containing textual strings. The look up tables are available under "Additional resources" section towards the border-bottom
         of the table for the 2015 data.
 
@@ -185,9 +189,9 @@
 
       <section id="feedback">
         <div>
-          <h3 class="heading-small">
+          <h2 class="heading-medium">
             Was this page useful for you?
-          </h3>
+          </h2>
           <form>
             <div class="form-group feedback-form">
               <fieldset class="inline">
@@ -247,6 +251,14 @@
       </section>
     </div>
     <div class="column-one-third related-datasets">
+      {% if related_datasets | length %}
+        <h3 class="heading-small">Related datasets</h3>
+        <ul>
+          {% for dataset in related_datasets %}
+            <li><a href="/datasets/{{ dataset.name }}">{{ dataset.title | truncate(65) }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
       <h3 class="heading-small related">Search UK Government data</h3>
       {% block top_search %}
         <form id="search-form" action="/search-results" method="GET" class="top-search">
@@ -257,14 +269,6 @@
           </fieldset>
         </form>
       {% endblock %}
-      {% if related_datasets | length %}
-        <h3 class="heading-small">Related datasets</h3>
-        <ul>
-          {% for dataset in related_datasets %}
-            <li><a href="/datasets/{{ dataset.name }}">{{ dataset.title | truncate(65) }}</a></li>
-          {% endfor %}
-        </ul>
-      {% endif %}
     </div>
   </div>
 </main>
