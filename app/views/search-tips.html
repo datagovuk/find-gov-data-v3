@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Find Data Alpha
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-two-thirds tips">
+
+      <h1 class="heading-large">
+        Get better results when you search on Find UK Government Data
+      </h1>
+      <h2 class="heading-medium">Choose your search words with care</h2>
+      <p>Choose words that will likely appear on the title or description of the dataset.</p>
+      <h2 class="heading-medium">Use the geographical area filter</h2>
+      <p>If the data you're looking affects a specific area only, use the geographical area filter to get more relevant results.</p>
+      <h2 class="heading-medium">Keep the publisher in mind</h2>
+      <p>If you're looking for data that spans to a national level or affects only a local authority, you can narrow down your search with the publisher filter by choosing the type of organisation that would publish that kind of data.</p>
+      <h2 class="heading-medium">View the publisher page if you know them</h2>
+      <p>If you know who has published the data you're looking for, you can visit their page on Find UK Government data and browse through their datasets or get in touch if you can't find what you're looking for.</p>
+
+      <div class="box search-tips">
+        <h3 class="heading-small">
+            Search on Fin UK Government data
+        </h3>
+        {% block top_search %}
+          <form id="search-form" action="/search-results" method="GET" class="top-search">
+            <fieldset>
+              <div id="search-box">
+                <input id="q" name="q" type="text" placeholder="" class="form-control search" autocomplete="off" value="{{query}}"/><button type="submit" class="search-submit">Find data</button>
+              </div>
+            </fieldset>
+          </form>
+        {% endblock %}
+      </div>
+
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}

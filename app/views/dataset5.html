@@ -45,6 +45,13 @@
           {% endfor %}
         </ul>
       {% endif %}
+        <h3 class="heading-small">Dataset collections</h3>
+        <ul>
+            <li><a href="/collections/registers">Registers</a></li>
+            <li><a href="/collections/flooding">Organograms</a></li>
+            <li><a href="/collections/registers">National Authorities</a></li>
+            <li><a href="/collections/flooding">Local authorities</a></li>
+        </ul>
       <h3 class="heading-small related">Search UK Government data</h3>
       {% block top_search %}
         <form id="search-form" action="/search-results" method="GET" class="top-search">
@@ -77,7 +84,7 @@
               <div class="year-datasets showHide-content" style="display: none">
                 <table>
                   <tr>
-                    <th class="title">Link to the data</th>
+                    <th class="title small">Link to the data</th>
                     <th>Format</th>
                     <th>Last updated</th>
                     <th> </th>
@@ -85,10 +92,21 @@
                   <tbody>
                     {% for datafile in yearGroup.datafiles %}
                       <tr>
-                        <td class="title"><a href="{{ datafile.url }}">
+                        <td class="title small">
                           {% if datafile.name %} {{ datafile.name }}
                           {% else %} Data Link
                           {% endif %}
+                          <h3 class="heading-small">Table headings:</h3>
+                          <p>Accident_Index, 
+                          Location_Easting_OSGR, 
+                          Location_Northing_OSGR, 
+                          Longitude, 
+                          Latitude, 
+                          Police_Force, 
+                          Accident_Severity, 
+                          Number_of_Vehicles, 
+                          Number_of_Casualties, 
+                          <a href="">View all</a></p>
                         </td>
                         {% if datafile.format %}
                         <td>{{ datafile.format }} (347kb)</td>
@@ -104,7 +122,10 @@
                             Not available
                         {% endif %}
                           </td>
-                          <td><a href="/preview-1">Preview</a></td>
+                          <td><a href="{{ datafile.url }}">Download</a></td>
+                      </tr>
+                      <tr colspan="4">
+                        
                       </tr>
                     {% endfor %}
                   </tbody>
@@ -120,15 +141,16 @@
           <h2 class="heading-medium">Data</h2>
           <table>
             <tr>
-              <th class="title">Link to the data</th>
+              <th class="title small">Link to the data</th>
               <th>Format</th>
               <th>Last updated</th>
+              <th> </th>
               <th> </th>
             </tr>
             <tbody>
               {% for datafile in result.resources %}
                 <tr>
-                  <td class="title"><a href="{{ datafile.url }}">
+                  <td class="title small">
                     {{ datafile.name or "Data Link"}}
                   </td>
                   {% if datafile.format %}
@@ -145,7 +167,8 @@
                       Not available
                   {% endif %}
                     </td>
-                  <td><a href="/preview-1">Preview</a></td>
+                    <td><a href="{{ datafile.url }}">Download</a></td>
+                    <td><a href="/preview-1">Preview</a></td>
                 </tr>
               {% endfor %}
             </tbody>

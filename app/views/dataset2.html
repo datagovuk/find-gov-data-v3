@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block page_title %}
-  Find Data Alpha
+  Find Data Alpha (2)
 {% endblock %}
 
 {% block content %}
@@ -35,33 +35,7 @@
         <p class="summary" style="max-height: 250px; overflow: hidden"> {{ result.notes }} </p>
       </div>
       <section class="data-links">
-    </div>
-    <div class="column-one-third related-datasets">
-      {% if related_datasets | length %}
-        <h3 class="heading-small">Related datasets</h3>
-        <ul>
-          {% for dataset in related_datasets %}
-            <li><a href="/datasets/{{ dataset.name }}">{{ dataset.title | truncate(65) }}</a></li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-      <h3 class="heading-small related">Search UK Government data</h3>
-      {% block top_search %}
-        <form id="search-form" action="/search-results" method="GET" class="top-search">
-          <fieldset>
-            <div id="search-box">
-              <input id="q" name="q" type="text" placeholder="" class="form-control search" autocomplete="off" value="{{query}}"/><button type="submit" class="search-submit">Find data</button>
-            </div>
-          </fieldset>
-        </form>
-      {% endblock %}
-    </div>
-  </div>
-  <div class="grid-row">
-
-    <div class="column-full">
-      <section>
-      <!-- accoridions for time series datasets -->
+<!-- accoridions for time series datasets -->
         {% if groups|length %}
           <h2 class="heading-medium">Data links
             <span class="showHide-open-all">Open all</span>
@@ -80,7 +54,6 @@
                     <th class="title">Link to the data</th>
                     <th>Format</th>
                     <th>Last updated</th>
-                    <th> </th>
                   </tr>
                   <tbody>
                     {% for datafile in yearGroup.datafiles %}
@@ -104,7 +77,6 @@
                             Not available
                         {% endif %}
                           </td>
-                          <td><a href="/preview-1">Preview</a></td>
                       </tr>
                     {% endfor %}
                   </tbody>
@@ -123,7 +95,6 @@
               <th class="title">Link to the data</th>
               <th>Format</th>
               <th>Last updated</th>
-              <th> </th>
             </tr>
             <tbody>
               {% for datafile in result.resources %}
@@ -145,7 +116,6 @@
                       Not available
                   {% endif %}
                     </td>
-                  <td><a href="/preview-1">Preview</a></td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -279,6 +249,26 @@
           </form>
         </div>
       </section>
+    </div>
+    <div class="column-one-third related-datasets">
+      {% if related_datasets | length %}
+        <h3 class="heading-small">Related datasets</h3>
+        <ul>
+          {% for dataset in related_datasets %}
+            <li><a href="/datasets/{{ dataset.name }}">{{ dataset.title | truncate(65) }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <h3 class="heading-small related">Search UK Government data</h3>
+      {% block top_search %}
+        <form id="search-form" action="/search-results" method="GET" class="top-search">
+          <fieldset>
+            <div id="search-box">
+              <input id="q" name="q" type="text" placeholder="" class="form-control search" autocomplete="off" value="{{query}}"/><button type="submit" class="search-submit">Find data</button>
+            </div>
+          </fieldset>
+        </form>
+      {% endblock %}
     </div>
   </div>
 </main>

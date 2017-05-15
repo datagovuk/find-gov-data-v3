@@ -222,7 +222,8 @@ const get_more_like_this = (dataset, n) => {
   })
 }
 
-router.get('/datasets/:name', function(req, res, next) {
+
+function renderDataset(template, req, res, next) {
   const esQuery = {
     index: process.env.ES_INDEX,
     body: {
@@ -266,7 +267,7 @@ router.get('/datasets/:name', function(req, res, next) {
     } else {
       get_more_like_this(result, 3)
         .then( matches => {
-          res.render('dataset', {
+          res.render(template, {
             result: result,
             related_datasets: matches,
             groups: groupByDate(result)
@@ -274,6 +275,12 @@ router.get('/datasets/:name', function(req, res, next) {
         })
      }
   })
-})
+}
+
+router.get('/datasets/:name', function(req, res, next) { renderDataset('dataset', req, res, next); })
+router.get('/datasets2/:name', function(req, res, next) { renderDataset('dataset2', req, res, next); })
+router.get('/datasets3/:name', function(req, res, next) { renderDataset('dataset3', req, res, next); })
+router.get('/datasets4/:name', function(req, res, next) { renderDataset('dataset4', req, res, next); })
+router.get('/datasets5/:name', function(req, res, next) { renderDataset('dataset5', req, res, next); })
 
 module.exports = router

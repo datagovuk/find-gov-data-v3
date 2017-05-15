@@ -98,9 +98,11 @@
               <dd><a href="#">{{ dataset.organisation.title }}</a></dd>
               <dt>Last updated:</dt>
               <dd>{{ dataset.last_updated }}</dd>
+              <dt>Geographical area:</dt>
               {% if dataset.location %}
-                <dt>Geographical area:</dt>
                 <dd>{{ dataset.location }}</dd>
+              {% else %}
+                <dd class="unavailable">Not available</dd>
               {% endif %}
             </dl>
         <p>{{ dataset.summary | truncate(140)  }}</p>
