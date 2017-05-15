@@ -19,10 +19,20 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
+router.get('/preview-1', function (req, res) {
+  console.log('req', req.query.name)
+  res.render('preview-1', {
+    name: req.query.name,
+    back: req.query.back
+  })
+})
+
 router.use(function(req,res,next){
   res.locals.data = data
   next()
 })
+
+
 
 const monthNames =  {'01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December'};
 const processEsResponse = results =>
@@ -270,7 +280,8 @@ function renderDataset(template, req, res, next) {
           res.render(template, {
             result: result,
             related_datasets: matches,
-            groups: groupByDate(result)
+            groups: groupByDate(result),
+            back: req.url
           })
         })
      }
