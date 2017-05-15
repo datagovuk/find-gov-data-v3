@@ -170,6 +170,16 @@ details {
   margin-top: 20px;
 }
 
+main.preview details {
+  margin-bottom: 40px;
+}
+
+main.preview details summary, main.preview details h3, main.preview details p {
+  max-width: 625px;
+}
+
+
+
 #feedback .button {
   margin-bottom: .7em
 }
@@ -416,6 +426,7 @@ ul.pagination {
   .preview {
     padding-right: 1.4em;
   }
+
   .year-datasets {
     li { margin: .7em 0 .5em 0 }
     h4 { margin-bottom: .3em }
@@ -627,22 +638,6 @@ section.preview {
   }
   ul.pagination {
     margin-left: 0;
-  }
-}
-
-ul.tabs {
-  border-bottom: 1px solid #BFC1C3;
-  margin-bottom: 40px;
-  li {
-    display: inline-block;
-    padding: 15px 20px 12px 20px;
-    margin-bottom: -1px;
-    &.active {
-      border-top: 1px solid #BFC1C3;
-      border-right: 1px solid #BFC1C3;
-      border-left: 1px solid #BFC1C3;
-      border-bottom: 1px solid #fff;
-    }
   }
 }
 
