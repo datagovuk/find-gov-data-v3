@@ -332,7 +332,7 @@ router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
             res.render(
               'preview-1',
               {
-                datasetName: req.params.name,
+                datasetName: req.params.datasetname,
                 datasetTitle: datalink.name,
                 error: "We cannot show a preview of this file as it isn't in CSV format"
               }
