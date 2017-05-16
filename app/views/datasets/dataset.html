@@ -79,7 +79,7 @@
                     <th class="title">Link to the data</th>
                     <th>Format</th>
                     <th>Last updated</th>
-                    <th> </th>
+                    <th></th>
                   </tr>
                   <tbody>
                     {% for datafile in yearGroup.datafiles %}
@@ -99,52 +99,60 @@
                              {{ datafile.last_updated }}
                           </td>
                         {% else %}
-                          <td class="no-date-added">
+                          <td class="not-available">
                             Not available
                         {% endif %}
-                          </td>
-                          <td><a href="/preview-1?name={{ datafile.name | urlencode }}&amp;back={{ back | urlencode }}">Preview</a></td>
+                        </td>
+                        <td>
+                          {% if datafile.format == "CSV" %}
+                            <a href="/preview-1/{{ result.name }}/{{ datafile.id }}">Preview</a>
+                          {% endif %}
+                        </td>
                       </tr>
                     {% endfor %}
                   </tbody>
                 </table>
               </div>
-                {% endfor %}
+            {% endfor %}
             </li>
           </ul>
           <input class="button" type="submit" value="Download all">
-<!-- no accordions for other datasets -->
+          <!-- no accordions for other datasets -->
         {% else %}
           {% if result.resources | length %}
-          <h2 class="heading-medium">Data</h2>
-          <table>
-            <tr>
-              <th class="title">Link to the data</th>
-              <th>Format</th>
-              <th>Last updated</th>
-              <th> </th>
-            </tr>
-            <tbody>
-              {% for datafile in result.resources %}
-                <tr>
-                  <td class="title"><a href="{{ datafile.url }}">
-                    {{ datafile.name or "Data Link"}}
-                  </td>
-                  {% if datafile.format %}
-                  <td>{{ datafile.format }} (347kb)</td>
-                  {% else %}
-                  <td>N/A</td>
-                  {% endif %}
-                  {% if datafile.date_added %}
-                    <td>
-                       {{ datafile.date_added }}
+            <h2 class="heading-medium">Data</h2>
+            <table>
+              <tr>
+                <th class="title">Link to the data</th>
+                <th>Format</th>
+                <th>Last updated</th>
+                <th> </th>
+              </tr>
+              <tbody>
+                {% for datafile in result.resources %}
+                  <tr>
+                    <td class="title"><a href="{{ datafile.url }}">
+                      {{ datafile.name or "Data Link"}}
                     </td>
-                  {% else %}
-                    <td class="no-date-added">
-                      Not available
-                  {% endif %}
-                    </td>
-                  <td><a href="/preview-1?name={{ datafile.name | urlencode }}&amp;back={{ back | urlencode }}">Preview</a></td>
+                    {% if datafile.format %}
+                      <td>{{ datafile.format }} (347kb)</td>
+                    {% else %}
+                      <td>N/A</td>
+                    {% endif %}
+                    {% if datafile.date_added %}
+                      <td>
+                        {{ datafile.date_added }}
+                      </td>
+                    {% else %}
+                      <td class="not-available">
+                        Not available
+                    {% endif %}
+                      </td>
+                      <td>
+                        {% if datafile.format == "CSV" %}
+                          <a href="/preview-1/{{ dataset.name }}/{{ datafile.id }}">Preview</a>
+                        {% endif %}
+                      </td>
                 </tr>
               {% endfor %}
             </tbody>

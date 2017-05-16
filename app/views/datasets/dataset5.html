@@ -97,15 +97,15 @@
                           {% else %} Data Link
                           {% endif %}
                           <h3 class="heading-small">Table headings:</h3>
-                          <p>Accident_Index, 
-                          Location_Easting_OSGR, 
-                          Location_Northing_OSGR, 
-                          Longitude, 
-                          Latitude, 
-                          Police_Force, 
-                          Accident_Severity, 
-                          Number_of_Vehicles, 
-                          Number_of_Casualties, 
+                          <p>Accident_Index,
+                          Location_Easting_OSGR,
+                          Location_Northing_OSGR,
+                          Longitude,
+                          Latitude,
+                          Police_Force,
+                          Accident_Severity,
+                          Number_of_Vehicles,
+                          Number_of_Casualties,
                           <a href="">View all</a></p>
                         </td>
                         {% if datafile.format %}
@@ -118,14 +118,14 @@
                              {{ datafile.last_updated }}
                           </td>
                         {% else %}
-                          <td class="no-date-added">
+                          <td class="not-available">
                             Not available
                         {% endif %}
                           </td>
                           <td><a href="{{ datafile.url }}">Download</a></td>
                       </tr>
                       <tr colspan="4">
-                        
+
                       </tr>
                     {% endfor %}
                   </tbody>
@@ -163,7 +163,7 @@
                        {{ datafile.date_added }}
                     </td>
                   {% else %}
-                    <td class="no-date-added">
+                    <td class="not-available">
                       Not available
                   {% endif %}
                     </td>

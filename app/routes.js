@@ -19,12 +19,6 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
-router.get('/preview-1', function (req, res) {
-  res.render('preview-1', {
-    name: req.query.name,
-    back: req.query.back
-  })
-})
 
 router.use(function(req,res,next){
   res.locals.data = data
@@ -247,7 +241,6 @@ function renderDataset(template, req, res, next) {
     const groupByDate = function(result){
       var groups = []
 
-
       result.resources.forEach(function(datafile){
         if (datafile['start_date']) {
           const yearArray = groups.filter(yearObj => yearObj.year == datafile['start_date'].substr(0,4))
@@ -292,5 +285,32 @@ router.get('/datasets2/:name', function(req, res, next) { renderDataset('dataset
 router.get('/datasets3/:name', function(req, res, next) { renderDataset('datasets/dataset3', req, res, next); })
 router.get('/datasets4/:name', function(req, res, next) { renderDataset('datasets/dataset4', req, res, next); })
 router.get('/datasets5/:name', function(req, res, next) { renderDataset('datasets/dataset5', req, res, next); })
+
+
+
+/* ========== Preview page ========== */
+
+router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
+  // retrieve details for the datafile (URL, name)
+  const esQuery = {
+    index: process.env.ES_INDEX,
+    body: {
+      query: { term: { name : req.params.datasetname } }
+    }
+  }
+
+  esClient.search(esQuery, (esError, esResponse) => {
+    const datalink = esResponse.hits.hits[0]._source.resources
+      .filter(l => l.id == req.params.datafileid)[0]
+    res.render(
+      'preview-1',
+      {
+        datasetName: req.params.name,
+        datasetTitle: datalink.name
+      }
+    )
+  })
+})
+
 
 module.exports = router
