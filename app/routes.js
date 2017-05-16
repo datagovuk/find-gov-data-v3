@@ -352,8 +352,7 @@ router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
         .on('response', response => {
           if (response.headers['content-type'].indexOf('csv') == -1) {
             preview_fail(req, res, dataset_title, datalink,
-              //"We cannot show a preview of this file as it isn't in CSV format"
-              response.headers['content-type']
+              "We cannot show a preview of this file as it isn't in CSV format"
             )
           }
           else {
