@@ -266,8 +266,8 @@ function renderDataset(template, req, res, next) {
         .sort((g1, g2) => cmpStrings(g1.year, g2.year))
     }
 
-    if (esError) {
-      throw esError
+    if (esError || !result) {
+      res.status(404).send('Not found');
     } else {
       get_more_like_this(result, 3)
         .then( matches => {
