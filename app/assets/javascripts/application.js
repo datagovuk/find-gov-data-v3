@@ -34,6 +34,9 @@ $(document).ready(function () {
   new FoldableText('.summary', 200)
     .init()
 
+  new limitDatasets('.show-toggle')
+    .init()
+
 })
 
 var ShowHide = function() {
@@ -135,4 +138,35 @@ FoldableText.prototype.init = function() {
       $el.next('.fold').on('click', this.toggle.bind(this));
     }
   })
+}
+
+// Limit number of results for non-time series data
+
+var limitDatasets = function(selector) {
+  this.selector = selector
+  this.moreFiles = $(this.selector)
+                    .parent()
+                    .find('.js-show-more-datafiles')
+  return this
+}
+
+limitDatasets.prototype.toggle = function(event) {
+  const $target = $(event.target)
+  var folded = $target.data('folded')
+  if (folded === 'folded') {
+    $target.text('Show less')
+    this.moreFiles.show()
+    $target.data('folded', 'unfolded')
+  } else {
+    $target.text('Show more')
+    this.moreFiles.hide()
+    $target.data('folded', 'folded')
+  }
+}
+
+
+limitDatasets.prototype.init = function() {
+  this.moreFiles.hide()
+  $(this.selector).data("folded", 'folded')
+  $(this.selector).on('click', this.toggle.bind(this));
 }

@@ -673,3 +673,14 @@ section#feedback h2 {
 p.table-heading {
   margin-top: 10px;
 }
+
+// dataset page show all button
+
+.show-toggle {
+  font-size: 16px;
+  float: left;
+  font-weight: normal;
+  display: inline-block;
+  color: $link-colour;
+  text-decoration: underline;
+}

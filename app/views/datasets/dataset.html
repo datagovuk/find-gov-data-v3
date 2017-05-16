@@ -113,7 +113,9 @@
             </li>
           </ul>
           <input class="button" type="submit" value="Download all">
+
 <!-- no accordions for other datasets -->
+
         {% else %}
           {% if result.resources | length %}
           <h2 class="heading-medium">Data</h2>
@@ -125,30 +127,41 @@
               <th> </th>
             </tr>
             <tbody>
-              {% for datafile in result.resources %}
-                <tr>
-                  <td class="title"><a href="{{ datafile.url }}">
-                    {{ datafile.name or "Data Link"}}
-                  </td>
-                  {% if datafile.format %}
-                  <td>{{ datafile.format }} (347kb)</td>
-                  {% else %}
-                  <td>N/A</td>
-                  {% endif %}
-                  {% if datafile.date_added %}
-                    <td>
-                       {{ datafile.date_added }}
-                    </td>
-                  {% else %}
-                    <td class="no-date-added">
-                      Not available
-                  {% endif %}
-                    </td>
-                  <td><a href="/preview-1">Preview</a></td>
-                </tr>
-              {% endfor %}
+  <!-- First five datalinks -->
+              {% for datafile in result.resources.slice(0,5) %}
+              <tr>
+                <td class="title"><a href="{{ datafile.url }}">
+                  {{ datafile.name or "Data Link"}}
+                </td>
+                {% if datafile.format %}
+                <td>{{ datafile.format }} (347kb)</td>
+                {% else %}
+                <td>N/A</td>
+                {% endif %}
+                <td class="{% if not datafile.last_updated %}no-date-added{% endif %}">
+                   {{ datafile.last_updated or "Not available"}}
+                </td>
+              </tr>
+            {% endfor %}
+  <!-- Rest of the datalinks -->
+              {% for datafile in result.resources.slice(5) %}
+              <tr class='js-show-more-datafiles'>
+                <td class="title"><a href="{{ datafile.url }}">
+                  {{ datafile.name or "Data Link"}}
+                </td>
+                {% if datafile.format %}
+                <td>{{ datafile.format }} (347kb)</td>
+                {% else %}
+                <td>N/A</td>
+                {% endif %}
+                <td class="{% if not datafile.last_updated %}no-date-added{% endif %}">
+                   {{ datafile.last_updated or "Not available"}}
+                </td>
+              </tr>
+            {% endfor %}
             </tbody>
           </table>
+          <p class="show-toggle">Show more</p>
           {% endif %}
         {% endif %}
       </section>
