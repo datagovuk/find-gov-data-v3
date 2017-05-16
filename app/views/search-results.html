@@ -109,24 +109,28 @@
       </div>
       {% endfor %}
 
-      <ul class="pagination">
-        <br />
-        <li>1</li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-      </ul>
-
-      <div class="related-searches">
-        <h2 class="heading-medium">Searches related to "road safety data"</h2>
-        <ul>
-          <li><a href="https://find-gov-data-v2.herokuapp.com/search-results?q=stats19+data">stats19 data</a></li>
-          <li><a href="">uk road accident map</a></li>
-          <li><a href="https://find-gov-data-v2.herokuapp.com/search-results?q=uk+road+accident+map">road accident statistics uk</a></li>
-          <li><a href="https://find-gov-data-v2.herokuapp.com/search-results?q=road+accident+data">road accident data</a></li>
+      {% if numResults > 0 %}
+        <ul class="pagination">
+          <br />
+          <li>1</li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
         </ul>
-      </div>
+     
+        <div class="related-searches">
+          <h2 class="heading-medium">Searches related to "road safety data"</h2>
+          <ul>
+            <li><a href="https://find-gov-data-v2.herokuapp.com/search-results?q=stats19+data">stats19 data</a></li>
+            <li><a href="">uk road accident map</a></li>
+            <li><a href="https://find-gov-data-v2.herokuapp.com/search-results?q=uk+road+accident+map">road accident statistics uk</a></li>
+            <li><a href="https://find-gov-data-v2.herokuapp.com/search-results?q=road+accident+data">road accident data</a></li>
+          </ul>
+        </div>
+      {% else %}
+      <!-- 0 search results content will go here -->
+      {% endif %}
     </div>
 
   </div>
