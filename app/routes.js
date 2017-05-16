@@ -305,29 +305,39 @@ router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
     const datalink = esResponse.hits.hits[0]._source.resources
       .filter(l => l.id == req.params.datafileid)[0]
 
-    if (datalink.format === 'CSV') {
       const csvRequest = request.get(datalink.url);
       csvRequest
         .on('response', response => {
-          var str="";
-          response.on('data', data => {
-            str+=data;
-            if (str.length>100000) {
-              str = str.split('\n').slice(0,6).join('\n');
-              parse(str, { to: 5, columns: true }, (err, output) => {
-                res.render(
-                  'preview-1',
-                  {
-                    datasetName: req.params.datasetname,
-                    datasetTitle: datalink.name,
-                    previewData: output,
-                    previewHeadings: Object.keys(output[0])
-                  }
-                )
-              })
-              csvRequest.abort();
-            }
-          })
+          if (response.headers['content-type'].indexOf('csv') !== -1) {
+            var str="";
+            response.on('data', data => {
+              str+=data;
+              if (str.length>100000) {
+                str = str.split('\n').slice(0,6).join('\n');
+                parse(str, { to: 5, columns: true }, (err, output) => {
+                  res.render(
+                    'preview-1',
+                    {
+                      datasetName: req.params.datasetname,
+                      datasetTitle: datalink.name,
+                      previewData: output,
+                      previewHeadings: Object.keys(output[0])
+                    }
+                  )
+                })
+                csvRequest.abort();
+              }
+            })
+          } else {
+            res.render(
+              'preview-1',
+              {
+                datasetName: req.params.name,
+                datasetTitle: datalink.name,
+                error: "We cannot show a preview of this file as it isn't in CSV format"
+              }
+            )
+          }
         })
         .on('error', error => {
           res.render(
@@ -339,16 +349,6 @@ router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
             }
           )
         })
-    } else {
-      res.render(
-        'preview-1',
-        {
-          datasetName: req.params.name,
-          datasetTitle: datalink.name,
-          error: "We cannot show a preview of this file as it isn't in CSV format"
-        }
-      )
-    }
   })
 })
 
