@@ -1,0 +1,29 @@
+<!-- partial for rendering datalinks which are not grouped by date -->
+
+  <h2 class="heading-medium">Data</h2>
+  <table>
+    <tr>
+      <th class="title">Link to the data</th>
+      <th>Format</th>
+      <th>Last updated</th>
+      <th> </th>
+    </tr>
+    <tbody>
+    {% for datafile in result.resources %}
+      <tr {% if result.resources.slice(5).includes(datafile) %} class='js-show-more-datafiles' {% endif %}>
+        <td class="title"><a href="{{ datafile.url }}">
+          {{ datafile.name or "Data Link"}}
+        </td>
+        {% if datafile.format %}
+        <td>{{ datafile.format }} (347kb)</td>
+        {% else %}
+        <td>N/A</td>
+        {% endif %}
+        <td class="{% if not datafile.last_updated %}no-date-added{% endif %}">
+           {{ datafile.last_updated or "Not available"}}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p class="show-toggle">Show more</p>
