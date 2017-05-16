@@ -350,24 +350,32 @@ router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
       const csvRequest = request.get(datalink.url);
       csvRequest
         .on('response', response => {
-          var str="";
-          response.on('data', data => {
-            str += data;
-            // If we've got more than 1000000 bytes
-            if (str.length>32000) {
-              str = str.split('\n').slice(0,6).join('\n');
-              parse(str, { to: 5, columns: true }, (err, output) => {
-                if (err) {
-                  preview_fail(req, res, dataset_title, datalink,
-                    "We cannot show this preview as there is an error in the CSV data"
-                  )
-                } else {
-                  preview_success(req, res, dataset_title, datalink, output)
-                }
-              })
-              csvRequest.abort();
-            }
-          })
+          if (response.headers['content-type'].indexOf('csv') == -1) {
+            preview_fail(req, res, dataset_title, datalink,
+              //"We cannot show a preview of this file as it isn't in CSV format"
+              response.headers['content-type']
+            )
+          }
+          else {
+            var str="";
+            response.on('data', data => {
+              str += data;
+              // If we've got more than 32000 bytes
+              if (str.length>32000) {
+                str = str.split('\n').slice(0,6).join('\n');
+                parse(str, { to: 5, columns: true }, (err, output) => {
+                  if (err) {
+                    preview_fail(req, res, dataset_title, datalink,
+                      "We cannot show this preview as there is an error in the CSV data"
+                    )
+                  } else {
+                    preview_success(req, res, dataset_title, datalink, output)
+                  }
+                })
+                csvRequest.abort();
+              }
+            })
+          }
         })
         .on('error', error => {
           preview_fail(req, res, dataset_title, null,
