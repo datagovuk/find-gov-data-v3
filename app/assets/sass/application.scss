@@ -31,7 +31,6 @@ $path: "/public/images/";
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
 * {
-
   font-family: $helvetica-regular !important;
 }
 
@@ -211,11 +210,11 @@ main.results-page#content .grid-row.masthead {
 
 .result {
   border-bottom: 1px solid #BFC1C3;
-  padding-left: 25px;
-  padding-bottom: 25px;
-  padding-top: 20px;
+  padding-bottom: 35px;
+  margin-top: 35px;
   h2 {
     margin-bottom: 10px;
+    margin-top: 0;
   }
   dl.metadata {
     font-size: 16px;
@@ -227,12 +226,16 @@ main.results-page#content .grid-row.masthead {
       width: 72%;
     }
   }
+  .register {
+      background-color: #eee;
+      border-left: solid 8px #aaa;
+      padding-left: 10px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+  }
 }
 
-.register {
-  background-color: #eee;
-  border-left: solid 8px #aaa;
-}
+
 
 
 .filters {
@@ -256,11 +259,6 @@ main.results-page#content .grid-row.masthead {
   display: inline-block;
   width: 49%;
 }
-
-// .masthead {
-//     margin: 0;
-//     background: #eee;
-// }
 
 /* Facet block */
 .filter-block {
@@ -509,7 +507,7 @@ a:focus {
   }
 }
 
-.no-date-added {
+.not-available {
   color: #BFC1C3;
 }
 
@@ -622,9 +620,9 @@ main.preview#content {
 
 section.preview {
   margin-top: 40px;
-  overflow-x: scroll;
   table {
     border: 2px solid #DEE0E2;
+    background: #fff;
     th, td {
       padding-left: 20px;
       padding-right: 20px;

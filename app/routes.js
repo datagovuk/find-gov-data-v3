@@ -2,6 +2,9 @@ var express = require('express')
 var router = express.Router()
 var data = require('./data.js')
 var elasticsearch = require('elasticsearch')
+var request = require('request');
+var http = require('http');
+var parse = require('csv-parse');
 
 const esClient = new elasticsearch.Client({
   host: process.env.ES_HOSTS,
@@ -17,13 +20,6 @@ router.use(function(req,res,next){
 // Route index page
 router.get('/', function (req, res) {
   res.render('index')
-})
-
-router.get('/preview-1', function (req, res) {
-  res.render('preview-1', {
-    name: req.query.name,
-    back: req.query.back
-  })
 })
 
 router.use(function(req,res,next){
@@ -247,7 +243,6 @@ function renderDataset(template, req, res, next) {
     const groupByDate = function(result){
       var groups = []
 
-
       result.resources.forEach(function(datafile){
         if (datafile['start_date']) {
           const yearArray = groups.filter(yearObj => yearObj.year == datafile['start_date'].substr(0,4))
@@ -271,16 +266,15 @@ function renderDataset(template, req, res, next) {
         .sort((g1, g2) => cmpStrings(g1.year, g2.year))
     }
 
-    if (esError) {
-      throw esError
+    if (esError || !result) {
+      res.status(404).send('Not found');
     } else {
       get_more_like_this(result, 3)
         .then( matches => {
           res.render(template, {
             result: result,
             related_datasets: matches,
-            groups: groupByDate(result),
-            back: req.url
+            groups: groupByDate(result)
           })
         })
      }
@@ -292,5 +286,108 @@ router.get('/datasets2/:name', function(req, res, next) { renderDataset('dataset
 router.get('/datasets3/:name', function(req, res, next) { renderDataset('datasets/dataset3', req, res, next); })
 router.get('/datasets4/:name', function(req, res, next) { renderDataset('datasets/dataset4', req, res, next); })
 router.get('/datasets5/:name', function(req, res, next) { renderDataset('datasets/dataset5', req, res, next); })
+
+
+
+/* ========== Preview page ========== */
+
+// On successfully fetching some data to preview, will render if to the template
+const preview_success = (req, res, dataset_title, datalink, output) => {
+  res.render(
+    'preview-1',
+    {
+      datasetName: req.params.datasetname,
+      datasetTitle: dataset_title,
+      filename: datalink.name,
+      url: datalink.url,
+      previewData: output,
+      previewHeadings: Object.keys(output[0])
+    }
+  )
+}
+
+// We might fail to fetch some data to preview, for a plethora of reasons
+// and in this case we will fail gracefully
+const preview_fail = (req, res, dataset_title, datalink, error) => {
+
+  // Handle the possible missing datalink. Would be nicer if we had
+  // if expressions ...
+  var url = ''
+  var filename = ''
+
+  if (datalink) {
+    url = datalink.url
+    filename = datalink.name
+  }
+
+  res.render(
+    'preview-1',
+    {
+      datasetName: req.params.datasetname,
+      datasetTitle: dataset_title,
+      filename: filename,
+      url: url,
+      error: "We cannot show this preview as there is an error in the CSV data"
+    }
+  )
+}
+
+router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
+  // retrieve details for the datafile (URL, name)
+  const esQuery = {
+    index: process.env.ES_INDEX,
+    body: {
+      query: { term: { name : req.params.datasetname } }
+    }
+  }
+
+  esClient.search(esQuery, (esError, esResponse) => {
+    const datalink = esResponse.hits.hits[0]._source.resources
+      .filter(l => l.id == req.params.datafileid)[0]
+    const dataset_title = esResponse.hits.hits[0]._source.title
+
+    if (datalink && datalink.format === 'CSV') {
+      const csvRequest = request.get(datalink.url);
+      csvRequest
+        .on('response', response => {
+          if (response.headers['content-type'].indexOf('csv') == -1) {
+            preview_fail(req, res, dataset_title, datalink,
+              "We cannot show a preview of this file as it isn't in CSV format"
+            )
+          }
+          else {
+            var str="";
+            response.on('data', data => {
+              str += data;
+              // If we've got more than 32000 bytes
+              if (str.length>32000) {
+                str = str.split('\n').slice(0,6).join('\n');
+                parse(str, { to: 5, columns: true }, (err, output) => {
+                  if (err) {
+                    preview_fail(req, res, dataset_title, datalink,
+                      "We cannot show this preview as there is an error in the CSV data"
+                    )
+                  } else {
+                    preview_success(req, res, dataset_title, datalink, output)
+                  }
+                })
+                csvRequest.abort();
+              }
+            })
+          }
+        })
+        .on('error', error => {
+          preview_fail(req, res, dataset_title, null,
+            "We cannot show this preview as there is an error in the CSV data"
+          )
+        })
+    } else {
+      preview_fail(req, res, dataset_title, null,
+        "We cannot show a preview of this file as it isn't in CSV format"
+      )
+    }
+  })
+})
+
 
 module.exports = router
