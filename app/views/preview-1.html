@@ -23,18 +23,26 @@
       </details>
       <input class="button" type="submit" value="Download this file">
       <section class="preview">
-        <table>
-          <thead>
-            <th>Accident_Index</th><th>Location_Easting_OSGR</th><th>Location_Northing_OSGR</th><th>Longitude</th><th>Latitude</th><th>Police_Force</th><th>Accident_Severity</th><th>Number_of_Vehicles</th><th>Number_of_Casualties</th><th>Date</th><th>Day_of_Week</th><th>Time</th><th>Local_Authority_(District)</th><th>Local_Authority_(Highway)</th><th>1st_Road_Class</th><th>1st_Road_Number</th><th>Road_Type</th><th>Speed_limit</th><th>Junction_Detail</th><th>Junction_Control</th><th>2nd_Road_Class</th><th>2nd_Road_Number</th><th>Pedestrian_Crossing-Human_Control</th><th>Pedestrian_Crossing-Physical_Facilities</th><th>Light_Conditions</th><th>Weather_Conditions</th><th>Road_Surface_Conditions</th><th>Special_Conditions_at_Site</th><th>Carriageway_Hazards</th><th>Urban_or_Rural_Area</th><th>Did_Police_Officer_Attend_Scene_of_Accident</th><th>LSOA_of_Accident_Location</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>201501BS70001</td><td>525130</td><td>180050</td><td>-0.198465</td><td>51.505538</td><td>1</td><td>3</td><td>1</td><td>1</td><td>12/01/2015</td><td>2</td><td>18:45</td><td>12</td><td>E09000020</td><td>5</td><td>0</td><td>6</td><td>30</td><td>3</td><td>4</td><td>6</td><td>0</td><td>0</td><td>0</td><td>4</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>E01002825</td></tr>
-            <tr><td>201501BS70002</td><td>526530</td><td>178560</td><td>-0.178838</td><td>51.491836</td><td>1</td><td>3</td><td>1</td><td>1</td><td>12/01/2015</td><td>2</td><td>07:50</td><td>12</td><td>E09000020</td><td>6</td><td>0</td><td>6</td><td>30</td><td>3</td><td>4</td><td>3</td><td>3218</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>E01002820</td></tr>
-            <tr><td>201501BS70004</td><td>524610</td><td>181080</td><td>-0.205590</td><td>51.514910</td><td>1</td><td>3</td><td>1</td><td>1</td><td>12/01/2015</td><td>2</td><td>18:08</td><td>12</td><td>E09000020</td><td>4</td><td>415</td><td>6</td><td>30</td><td>2</td><td>4</td><td>6</td><td>0</td><td>0</td><td>1</td><td>4</td><td>2</td><td>2</td><td>0</td><td>0</td><td>1</td><td>1</td><td>E01002833</td></tr>
-            <tr><td>201501BS70005</td><td>524420</td><td>181080</td><td>-0.208327</td><td>51.514952</td><td>1</td><td>3</td><td>1</td><td>1</td><td>13/01/2015</td><td>3</td><td>07:40</td><td>12</td><td>E09000020</td><td>4</td><td>450</td><td>6</td><td>30</td><td>6</td><td>4</td><td>6</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>2</td><td>0</td><td>0</td><td>1</td><td>2</td><td>E01002874</td></tr>
-            <tr><td>201501BS70008</td><td>524630</td><td>179040</td><td>-0.206022</td><td>51.496572</td><td>1</td><td>2</td><td>2</td><td>1</td><td>09/01/2015</td><td>6</td><td>07:30</td><td>12</td><td>E09000020</td><td>3</td><td>315</td><td>6</td><td>30</td><td>6</td><td>2</td><td>3</td><td>3220</td><td>0</td><td>5</td><td>1</td><td>2</td><td>2</td><td>0</td><td>0</td><td>1</td><td>2</td><td>E01002814</td></tr>
-          </tbody>
-        </table>
+        {% if error %}
+          {{ error }}
+        {% else %}
+          <table>
+            <thead>
+              {% for heading in previewHeadings %}
+                <th>{{ heading }}</th>
+              {% endfor %}
+            </thead>
+            <tbody>
+              {% for row in previewData %}
+                <tr>
+                  {% for key, value in row %}
+                    <td>{{ value }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
       </section>
       <details>
         <summary><span class="summary">Is there anything wrong with this data?</span></summary>

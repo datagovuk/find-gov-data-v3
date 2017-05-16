@@ -2,6 +2,9 @@ var express = require('express')
 var router = express.Router()
 var data = require('./data.js')
 var elasticsearch = require('elasticsearch')
+var request = require('request');
+var http = require('http');
+var parse = require('csv-parse');
 
 const esClient = new elasticsearch.Client({
   host: process.env.ES_HOSTS,
@@ -272,8 +275,7 @@ function renderDataset(template, req, res, next) {
           res.render(template, {
             result: result,
             related_datasets: matches,
-            groups: groupByDate(result),
-            back: req.url
+            groups: groupByDate(result)
           })
         })
      }
@@ -302,13 +304,51 @@ router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
   esClient.search(esQuery, (esError, esResponse) => {
     const datalink = esResponse.hits.hits[0]._source.resources
       .filter(l => l.id == req.params.datafileid)[0]
-    res.render(
-      'preview-1',
-      {
-        datasetName: req.params.name,
-        datasetTitle: datalink.name
-      }
-    )
+
+    if (datalink.format === 'CSV') {
+      const csvRequest = request.get(datalink.url);
+      csvRequest
+        .on('response', response => {
+          var str="";
+          response.on('data', data => {
+            str+=data;
+            if (str.length>100000) {
+              str = str.split('\n').slice(0,6).join('\n');
+              parse(str, { to: 5, columns: true }, (err, output) => {
+                res.render(
+                  'preview-1',
+                  {
+                    datasetName: req.params.datasetname,
+                    datasetTitle: datalink.name,
+                    previewData: output,
+                    previewHeadings: Object.keys(output[0])
+                  }
+                )
+              })
+              csvRequest.abort();
+            }
+          })
+        })
+        .on('error', error => {
+          res.render(
+            'preview-1',
+            {
+              datasetName: req.params.datasetname,
+              datasetTitle: datalink.name,
+              error: "We cannot show this preview as there is an error in the CSV data"
+            }
+          )
+        })
+    } else {
+      res.render(
+        'preview-1',
+        {
+          datasetName: req.params.name,
+          datasetTitle: datalink.name,
+          error: "We cannot show a preview of this file as it isn't in CSV format"
+        }
+      )
+    }
   })
 })
 
