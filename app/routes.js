@@ -310,7 +310,8 @@ const preview_success = (req, res, dataset_title, datalink, output) => {
 // and in this case we will fail gracefully
 const preview_fail = (req, res, dataset_title, datalink, error) => {
 
-  // Handle the possible missing datalink. Would be nicer if we
+  // Handle the possible missing datalink. Would be nicer if we had
+  // if expressions ...
   var url = ''
   var filename = ''
 
