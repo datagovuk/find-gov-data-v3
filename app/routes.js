@@ -20,7 +20,6 @@ router.get('/', function (req, res) {
 })
 
 router.get('/preview-1', function (req, res) {
-  console.log('req', req.query.name)
   res.render('preview-1', {
     name: req.query.name,
     back: req.query.back
