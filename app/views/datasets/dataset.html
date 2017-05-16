@@ -127,25 +127,8 @@
               <th> </th>
             </tr>
             <tbody>
-  <!-- First five datalinks -->
-              {% for datafile in result.resources.slice(0,5) %}
-              <tr>
-                <td class="title"><a href="{{ datafile.url }}">
-                  {{ datafile.name or "Data Link"}}
-                </td>
-                {% if datafile.format %}
-                <td>{{ datafile.format }} (347kb)</td>
-                {% else %}
-                <td>N/A</td>
-                {% endif %}
-                <td class="{% if not datafile.last_updated %}no-date-added{% endif %}">
-                   {{ datafile.last_updated or "Not available"}}
-                </td>
-              </tr>
-            {% endfor %}
-  <!-- Rest of the datalinks -->
-              {% for datafile in result.resources.slice(5) %}
-              <tr class='js-show-more-datafiles'>
+              {% for datafile in result.resources %}
+              <tr {% if result.resources.slice(5).includes(datafile) %} class='js-show-more-datafiles' {% endif %}>
                 <td class="title"><a href="{{ datafile.url }}">
                   {{ datafile.name or "Data Link"}}
                 </td>
