@@ -10,7 +10,14 @@
   <div class="grid-row">
     <div class="column-full">
       <a href="/datasets/{{ datasetName }}" class="link-back">Back to dataset</a>
-      <h1 class="heading-large">{{ datasetTitle }}</h1>
+      <h1 class="heading-large">
+        {{ datasetTitle }}
+        {% if filename %}
+          <span class="heading-secondary">{{ filename }}</span>
+        {% endif %}
+      </h1>
+
+      {% if not error %}
       <p>You're previewing 5 rows out of the total 2000 in this file.</p>
       <details>
         <summary><span class="summary">How you can visualise this data</span></summary>
@@ -21,7 +28,12 @@
         <p>This data has dates in it, so you can visualise it as a time series to see evolution over time for example.</p>
         </div>
       </details>
-      <input class="button" type="submit" value="Download this file">
+      {% endif %}
+
+      {% if url %}
+        <a class="button" href="{{ url }}">Download this file</a>
+      {% endif%}
+
       <section class="preview">
         {% if error %}
           {{ error }}

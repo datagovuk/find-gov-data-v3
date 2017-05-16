@@ -22,7 +22,6 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
-
 router.use(function(req,res,next){
   res.locals.data = data
   next()
@@ -292,6 +291,47 @@ router.get('/datasets5/:name', function(req, res, next) { renderDataset('dataset
 
 /* ========== Preview page ========== */
 
+// On successfully fetching some data to preview, will render if to the template
+const preview_success = (req, res, dataset_title, datalink, output) => {
+  res.render(
+    'preview-1',
+    {
+      datasetName: req.params.datasetname,
+      datasetTitle: dataset_title,
+      filename: datalink.name,
+      url: datalink.url,
+      previewData: output,
+      previewHeadings: Object.keys(output[0])
+    }
+  )
+}
+
+// We might fail to fetch some data to preview, for a plethora of reasons
+// and in this case we will fail gracefully
+const preview_fail = (req, res, dataset_title, datalink, error) => {
+
+  // Handle the possible missing datalink. Would be nicer if we had
+  // if expressions ...
+  var url = ''
+  var filename = ''
+
+  if (datalink) {
+    url = datalink.url
+    filename = datalink.name
+  }
+
+  res.render(
+    'preview-1',
+    {
+      datasetName: req.params.datasetname,
+      datasetTitle: dataset_title,
+      filename: filename,
+      url: url,
+      error: "We cannot show this preview as there is an error in the CSV data"
+    }
+  )
+}
+
 router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
   // retrieve details for the datafile (URL, name)
   const esQuery = {
@@ -304,51 +344,48 @@ router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
   esClient.search(esQuery, (esError, esResponse) => {
     const datalink = esResponse.hits.hits[0]._source.resources
       .filter(l => l.id == req.params.datafileid)[0]
+    const dataset_title = esResponse.hits.hits[0]._source.title
 
+    if (datalink && datalink.format === 'CSV') {
       const csvRequest = request.get(datalink.url);
       csvRequest
         .on('response', response => {
-          if (response.headers['content-type'].indexOf('csv') !== -1) {
+          if (response.headers['content-type'].indexOf('csv') == -1) {
+            preview_fail(req, res, dataset_title, datalink,
+              "We cannot show a preview of this file as it isn't in CSV format"
+            )
+          }
+          else {
             var str="";
             response.on('data', data => {
-              str+=data;
-              if (str.length>100000) {
+              str += data;
+              // If we've got more than 32000 bytes
+              if (str.length>32000) {
                 str = str.split('\n').slice(0,6).join('\n');
                 parse(str, { to: 5, columns: true }, (err, output) => {
-                  res.render(
-                    'preview-1',
-                    {
-                      datasetName: req.params.datasetname,
-                      datasetTitle: datalink.name,
-                      previewData: output,
-                      previewHeadings: Object.keys(output[0])
-                    }
-                  )
+                  if (err) {
+                    preview_fail(req, res, dataset_title, datalink,
+                      "We cannot show this preview as there is an error in the CSV data"
+                    )
+                  } else {
+                    preview_success(req, res, dataset_title, datalink, output)
+                  }
                 })
                 csvRequest.abort();
               }
             })
-          } else {
-            res.render(
-              'preview-1',
-              {
-                datasetName: req.params.datasetname,
-                datasetTitle: datalink.name,
-                error: "We cannot show a preview of this file as it isn't in CSV format"
-              }
-            )
           }
         })
         .on('error', error => {
-          res.render(
-            'preview-1',
-            {
-              datasetName: req.params.datasetname,
-              datasetTitle: datalink.name,
-              error: "We cannot show this preview as there is an error in the CSV data"
-            }
+          preview_fail(req, res, dataset_title, null,
+            "We cannot show this preview as there is an error in the CSV data"
           )
         })
+    } else {
+      preview_fail(req, res, dataset_title, null,
+        "We cannot show a preview of this file as it isn't in CSV format"
+      )
+    }
   })
 })
 
