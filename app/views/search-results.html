@@ -95,17 +95,17 @@
             <a href="/datasets/{{ dataset.name }}">{{ dataset.title | truncate(65) }}</a>
           </h2>
             <dl class="metadata">
-                <dt>Published by:</dt>
-                <dd><a href="#">{{ dataset.organisation.title }}</a></dd>
-                <dt>Last updated:</dt>
-                <dd>{{ dataset.last_updated }}</dd>
-                <dt>Geographical area:</dt>
-                {% if dataset.location %}
-                  <dd>{{ dataset.location }}</dd>
-                {% else %}
-                  <dd class="unavailable">Not available</dd>
-                {% endif %}
-              </dl>
+              <dt>Published by:</dt>
+              <dd><a href="#">{{ dataset.organisation.title }}</a></dd>
+              <dt>Last updated:</dt>
+              <dd>{{ dataset.last_updated }}</dd>
+              <dt>Geographical area:</dt>
+              {% if dataset.location %}
+                <dd>{{ dataset.location }}</dd>
+              {% else %}
+                <dd class="unavailable">Not available</dd>
+              {% endif %}
+            </dl>
           <p>{{ dataset.summary | truncate(140)  }}</p>
         </div>
       </div>
