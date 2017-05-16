@@ -89,11 +89,12 @@
 
       {% for dataset in results %}
       <!-- When source data is fixed, reset to if dataset.dataset_type == 'register' -->
-      <div class="result result{% if regExp.test(dataset.title) %} register{% endif %} ">
-        <h2 class="heading-medium">
-          <a href="/datasets/{{ dataset.name }}">{{ dataset.title | truncate(65) }}</a>
-        </h2>
-        <dl class="metadata">
+      <div class="result">
+        <div class="{% if regExp.test(dataset.title) %}register{% endif %}">
+          <h2 class="heading-medium">
+            <a href="/datasets/{{ dataset.name }}">{{ dataset.title | truncate(65) }}</a>
+          </h2>
+            <dl class="metadata">
               <dt>Published by:</dt>
               <dd><a href="#">{{ dataset.organisation.title }}</a></dd>
               <dt>Last updated:</dt>
@@ -105,7 +106,8 @@
                 <dd class="unavailable">Not available</dd>
               {% endif %}
             </dl>
-        <p>{{ dataset.summary | truncate(140)  }}</p>
+          <p>{{ dataset.summary | truncate(140)  }}</p>
+        </div>
       </div>
       {% endfor %}
 
@@ -118,7 +120,7 @@
           <li><a href="#">4</a></li>
           <li><a href="#">5</a></li>
         </ul>
-     
+
         <div class="related-searches">
           <h2 class="heading-medium">Searches related to "road safety data"</h2>
           <ul>
