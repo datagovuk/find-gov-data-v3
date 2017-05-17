@@ -1,0 +1,53 @@
+<!-- partial for rendering datalinks which are grouped by date -->
+
+<h2 class="heading-medium">Data links
+  <span class="showHide-open-all">Open all</span>
+</h2>
+<div class="breaker"></div>
+<ul>
+  {% for yearGroup in groups %}
+  <li class="showHide">
+    <div class="year-expand showHide-control">
+      <h3 class="heading-small">{{ yearGroup.year }}</h3>
+      <div><span class="expand">+</span></div>
+    </div>
+    <div class="year-datasets showHide-content" style="display: none">
+      <table>
+        <tr>
+          <th class="title">Link to the data</th>
+          <th>Format</th>
+          <th>Last updated</th>
+          <th> </th>
+        </tr>
+        <tbody>
+          {% for datafile in yearGroup.datafiles %}
+            <tr>
+              <td class="title"><a href="{{ datafile.url }}">
+                {% if datafile.name %} {{ datafile.name }}
+                {% else %} Data Link
+                {% endif %}
+              </td>
+              {% if datafile.format %}
+              <td>{{ datafile.format }} (347kb)</td>
+              {% else %}
+              <td>N/A</td>
+              {% endif %}
+              {% if datafile.last_updated %}
+                <td>
+                   {{ datafile.last_updated }}
+                </td>
+              {% else %}
+                <td class="no-date-added">
+                  Not available
+              {% endif %}
+                </td>
+                <td><a href="/preview-1?name={{ datafile.name | urlencode }}&amp;back={{ back | urlencode }}">Preview</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+      {% endfor %}
+  </li>
+</ul>
+<input class="button" type="submit" value="Download all">

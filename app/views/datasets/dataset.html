@@ -36,6 +36,7 @@
       </div>
       <section class="data-links">
     </div>
+
     <div class="column-one-third related-datasets">
     <h3 class="heading-small">More Transport datasets</h3>
     <ul>
@@ -55,111 +56,31 @@
       {% endblock %}
       <a href="/search-tips">Tips to get better search results</a>
     </div>
+
   </div>
   <div class="grid-row">
 
     <div class="column-full">
-      <section>
-      <!-- accoridions for time series datasets -->
-        {% if groups|length %}
-          <h2 class="heading-medium">Data links
-            <span class="showHide-open-all">Open all</span>
-          </h2>
-          <div class="breaker"></div>
-          <ul>
-            {% for yearGroup in groups %}
-            <li class="showHide">
-              <div class="year-expand showHide-control">
-                <h3 class="heading-small">{{ yearGroup.year }}</h3>
-                <div><span class="expand">+</span></div>
-              </div>
-              <div class="year-datasets showHide-content" style="display: none">
-                <table>
-                  <tr>
-                    <th class="title">Link to the data</th>
-                    <th>Format</th>
-                    <th>Last updated</th>
-                    <th></th>
-                  </tr>
-                  <tbody>
-                    {% for datafile in yearGroup.datafiles %}
-                      <tr>
-                        <td class="title"><a href="{{ datafile.url }}">
-                          {% if datafile.name %} {{ datafile.name }}
-                          {% else %} Data Link
-                          {% endif %}
-                        </td>
-                        {% if datafile.format %}
-                        <td>{{ datafile.format }} (347kb)</td>
-                        {% else %}
-                        <td>N/A</td>
-                        {% endif %}
-                        {% if datafile.last_updated %}
-                          <td>
-                             {{ datafile.last_updated }}
-                          </td>
-                        {% else %}
-                          <td class="not-available">
-                            Not available
-                        {% endif %}
-                        </td>
-                        <td>
-                          {% if datafile.format == "CSV" %}
-                            <a href="/preview-1/{{ result.name }}/{{ datafile.id }}">Preview</a>
-                          {% endif %}
-                        </td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            {% endfor %}
-            </li>
-          </ul>
-          <input class="button" type="submit" value="Download all">
-          <!-- no accordions for other datasets -->
-        {% else %}
-          {% if result.resources | length %}
-            <h2 class="heading-medium">Data</h2>
-            <table>
-              <tr>
-                <th class="title">Link to the data</th>
-                <th>Format</th>
-                <th>Last updated</th>
-                <th> </th>
-              </tr>
-              <tbody>
-                {% for datafile in result.resources %}
-                  <tr>
-                    <td class="title"><a href="{{ datafile.url }}">
-                      {{ datafile.name or "Data Link"}}
-                    </td>
-                    {% if datafile.format %}
-                      <td>{{ datafile.format }} (347kb)</td>
-                    {% else %}
-                      <td>N/A</td>
-                    {% endif %}
-                    {% if datafile.date_added %}
-                      <td>
-                        {{ datafile.date_added }}
-                      </td>
-                    {% else %}
-                      <td class="not-available">
-                        Not available
-                    {% endif %}
-                      </td>
-                      <td>
-                        {% if datafile.format == "CSV" %}
-                          <a href="/preview-1/{{ result.name }}/{{ datafile.id }}">Preview</a>
-                        {% endif %}
-                      </td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+
+<!-- Datalinks section -->
+      {% if result.resources | length %}
+        <section>
+          {% if groups|length %}
+
+            {% block time_series_datalinks %}
+              {% include "includes/datalinks/time_series.html" %}
+            {% endblock %}
+
+          {% else %}
+
+            {% block non_time_series_datalinks %}
+              {% include "includes/datalinks/non_time_series.html" %}
+            {% endblock %}
+            
           {% endif %}
-        {% endif %}
-      </section>
+        </section>
+      {% endif %}
+<!---->
 
       <section>
         <h2 class="heading-medium">
