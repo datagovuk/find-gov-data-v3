@@ -22,7 +22,7 @@
         <td class="{% if not datafile.last_updated %}no-date-added{% endif %}">
            {{ datafile.last_updated or "Not available"}}
         </td>
-        <td><a href="/preview-1?name={{ datafile.name | urlencode }}&amp;back={{ back | urlencode }}">Preview</a></td>
+        <td><a href="/preview-1/{{ result.name }}/{{ datafile.id }}">Preview</a></td>
       </tr>
     {% endfor %}
     </tbody>
