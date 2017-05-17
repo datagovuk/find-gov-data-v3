@@ -38,6 +38,40 @@ module.exports = function (env) {
 
   ------------------------------------------------------------------ */
 
+  filters.sortedByDisplay = function(option) {
+    switch (option) {
+      case 'recent':
+        return 'Most recent'
+        break;
+      case 'viewed':
+        return 'Most viewed'
+        break;
+      case 'best':
+        return 'Best match'
+        break;
+    }
+  }
+
+  filters.orgTypDisplay = function(orgTypes) {
+    var types = orgTypes.map(function(abreviation){
+      if (abreviation == 'central-gov') {
+        return 'Central Government'
+      } else if (abreviation =='local-auth') {
+        return 'Local Authorities'
+      } else {
+        return 'Other government bodies'
+      }
+    })
+      if (types.length == 1) {
+        return types[0]
+      } else if (types.length == 2) {
+        return `${types[0]}' and '${types[1]}`
+      } else {
+        return `${types[0]}', '${types[1]}' and '${types[2]}`
+      }
+    }
+
+
   /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */

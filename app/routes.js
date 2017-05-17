@@ -6,6 +6,7 @@ var request = require('request');
 var http = require('http');
 var parse = require('csv-parse');
 
+
 const esClient = new elasticsearch.Client({
   host: process.env.ES_HOSTS,
 //  log: 'trace'
