@@ -141,19 +141,11 @@ table th, table td {
   vertical-align: top;
 }
 
-table tr td:last-child {
-  padding-right: 0;
-}
-
 table th.title, table td.title {
   width: 510px;
   &.small {
     width: 380px;
   }
-}
-
-table tr td:last-child {
-  text-align: right;
 }
 
 .feedback-form .multiple-choice {
