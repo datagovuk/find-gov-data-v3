@@ -346,11 +346,12 @@ router.get('/preview-1/:datasetname/:datafileid', function (req, res) {
       .filter(l => l.id == req.params.datafileid)[0]
     const dataset_title = esResponse.hits.hits[0]._source.title
 
+    datalink.format = datalink.format.toUpperCase();
     if (datalink && datalink.format === 'CSV') {
       const csvRequest = request.get(datalink.url);
       csvRequest
         .on('response', response => {
-          if (response.headers['content-type'].indexOf('csv') == -1) {
+          if (response.headers['content-type'].toLowerCase().indexOf('csv') == -1) {
             preview_fail(req, res, dataset_title, datalink,
               "We cannot show a preview of this file as it isn't in CSV format"
             )
