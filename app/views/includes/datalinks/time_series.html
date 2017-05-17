@@ -17,7 +17,7 @@
           <th class="title">Link to the data</th>
           <th>Format</th>
           <th>Last updated</th>
-          <th> </th>
+          <th>Data preview</th>
         </tr>
         <tbody>
           {% for datafile in yearGroup.datafiles %}
@@ -41,7 +41,15 @@
                   Not available
               {% endif %}
                 </td>
-                <td><a href="/preview-1/{{ result.name }}/{{ datafile.id }}">Preview</a></td>
+                <td>
+                  {% if datafile.format === 'CSV' %}
+                    <a href="/preview-1/{{ result.name }}/{{ datafile.id }}">Preview</a>
+                  {% elif datafile.format === 'HTML' %}
+                    <a href="{{ datafile.url }}">Go to site</a>
+                  {% else %}
+                    <span class="no-date-added">Not available</span>
+                  {% endif %}
+                </td>
             </tr>
           {% endfor %}
         </tbody>
