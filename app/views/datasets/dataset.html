@@ -38,12 +38,14 @@
     </div>
 
     <div class="column-one-third related-datasets">
-    <h3 class="heading-small">More Transport datasets</h3>
-    <ul>
-      <li><a href="/datasets/gb-road-traffic-counts">GB Road Traffic counts</a></li>
-      <li><a href="/datasets/cycle-routes_">Cycle routes</a></li>
-      <li><a href="/datasets/road_accident_datas">Road accident data</a></li>
-    </ul>
+      {% if related_datasets | length %}
+        <h3 class="heading-small">Related datasets</h3>
+        <ul>
+          {% for dataset in related_datasets %}
+            <li><a href="/datasets/{{ dataset.name }}">{{ dataset.title | truncate(65) }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
       <h3 class="heading-small related">Search UK Government data</h3>
       {% block top_search %}
         <form id="search-form" action="/search-results" method="GET" class="top-search">
