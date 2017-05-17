@@ -27,5 +27,7 @@
     {% endfor %}
     </tbody>
   </table>
-  <p class="show-toggle">Show more</p>
+  {% if (result.resources | length) > 5 %}
+    <p class="show-toggle">Show more</a>
+  {% endif %}
   <br />
