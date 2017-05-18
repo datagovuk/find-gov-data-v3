@@ -5,6 +5,7 @@ var elasticsearch = require('elasticsearch')
 var request = require('request');
 var http = require('http');
 var parse = require('csv-parse');
+var sanitizeHtml = require('sanitize-html');
 
 const esClient = new elasticsearch.Client({
   host: process.env.ES_HOSTS,
@@ -86,6 +87,10 @@ function UpdateDate(frequency, day, month, year){
   return nextUpdated
 }
 
+
+function sanitize(text) {
+  return sanitizeHtml(text, { allowedTags: [] })
+}
 
 
 router.get('/search-results', function(req, res, next) {
@@ -216,8 +221,8 @@ const get_more_like_this = (dataset, n) => {
         .map(item =>{
           return {
             name: item._source.name,
-            title: item._source.title,
-            summary: item._source.summary,
+            title: sanitize(item._source.title),
+            summary: sanitize(item._source.summary),
           }
         })
         .slice(0, n)
@@ -268,6 +273,10 @@ function renderDataset(template, req, res, next) {
     if (esError || !result) {
       res.status(404).send('Not found');
     } else {
+      result.title = sanitize(result.title)
+      result.summary = sanitize(result.summary)
+      result.notes = sanitize(result.notes)
+      result.location = sanitize(result.location)
       get_more_like_this(result, 3)
         .then( matches => {
           res.render(template, {
@@ -296,7 +305,7 @@ const preview_success = (req, res, dataset_title, datalink, output) => {
     'preview-1',
     {
       datasetName: req.params.datasetname,
-      datasetTitle: dataset_title,
+      datasetTitle: sanitize(dataset_title),
       filename: datalink.name,
       url: datalink.url,
       previewData: output,
@@ -323,7 +332,7 @@ const preview_fail = (req, res, dataset_title, datalink, error) => {
     'preview-1',
     {
       datasetName: req.params.datasetname,
-      datasetTitle: dataset_title,
+      datasetTitle: sanitize(dataset_title),
       filename: filename,
       url: url,
       error: "We cannot show this preview as there is an error in the CSV data"
