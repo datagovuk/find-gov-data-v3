@@ -28,7 +28,7 @@ gulp.task('copy-elements-sass', function () {
   .pipe(gulp.dest(config.paths.govukModules + '/govuk-elements-sass/'))
 })
 
-gulp.task('copy-typeahead', function () {
-  return gulp.src(['node_modules/accessible-typeahead/dist/**'])
-  .pipe(gulp.dest(config.paths.assets + '/accessible-typeahead/'))
+gulp.task('copy-autocomplete', function () {
+  return gulp.src(['node_modules/accessible-autocomplete/dist/**'])
+  .pipe(gulp.dest(config.paths.assets + '/accessible-autocomplete/'))
 })

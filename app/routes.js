@@ -174,7 +174,6 @@ router.get('/search-results', function(req, res, next) {
         orgTypes: orgTypes,
         sortBy: ['best', 'recent', 'viewed'].indexOf(sortBy) !== -1 ? sortBy : '',
         location: location,
-        locations: data.locations,
         results: processEsResponse(esResponse),
         numResults: total_results,
         pageCount: page_count,
