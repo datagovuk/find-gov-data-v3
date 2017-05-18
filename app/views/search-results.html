@@ -26,8 +26,8 @@
       <span class="bold-small">'{{ query }}'{% endif %}</span>
         {% if sortBy %} sorted by
       <span class="bold-small">'{{ sortBy | sortedByDisplay }}'{% endif %}</span>
-        {% if orgTypes %} published by
-      <span class="bold-small">'{{ orgTypes | orgTypDisplay }}'{% endif %}</span>
+        {% if local or central or bodies  %} published by
+      <span class="bold-small">'{{ orgTypes | orgTypDisplay | safe   }}'{% endif %}</span>
         {% if location %} filtered by
       <span class="bold-small">'{{ location }}'{% endif %}</span>
     </div>
