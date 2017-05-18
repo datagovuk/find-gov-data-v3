@@ -71,12 +71,7 @@
         <label for="location" class="form-label">
           Enter geographical area
         </label>
-        <select id="location" name="location">
-          {% for location in locations %}
-            <option>{{ location }}</option>
-          {% endfor %}
-        </select>
-
+        <div name="location" id="location" data-default="{{ location }}"></div>
 
         <input class="button" type="submit" value="Filter">
         <a href="?q={{ query }}" class="button secondary">Reset all filters</a>
